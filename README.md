@@ -24,3 +24,12 @@ Restricted to competition managers. Additionally, a `PATCH` request allows for s
 - Currently the WCA website returns `Person#registrantId` of `null`
 for people without a registration (e.g. non-participating organizer).
 - Currently the WCA website does not implement the following attributes: `Event#competitorLimit`, `Event#qualification`, `Round#scrambleSets`, `Activity#scrambleSetId`
+
+## Examples
+
+There are many applications using the WCIF format already, those include:
+- [WCA Live](https://github.com/thewca/wca-live)
+- [Groupifier](https://github.com/jonatanklosko/groupifier)
+- [Scrambles Matcher](https://github.com/viroulep/scrambles-matcher)
+- [TNoodle](https://github.com/thewca/tnoodle)
+- [WCIF Scripts](https://github.com/jonatanklosko/wcif-scripts)
