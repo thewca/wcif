@@ -3,6 +3,41 @@
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
 
+## Objects
+
+The specification defines the following types:
+
+- [Activity](#Activity)
+- [ActivityCode](#ActivityCode)
+- [AdvancementCondition](#AdvancementCondition)
+- [Assignment](#Assignment)
+- [AssignmentCode](#AssignmentCode)
+- [Attempt](#Attempt)
+- [AttemptResult](#AttemptResult)
+- [Avatar](#Avatar)
+- [Competition](#Competition)
+- [CountryCode](#CountryCode)
+- [Cutoff](#Cutoff)
+- [Date](#Date)
+- [DateTime](#DateTime)
+- [Event](#Event)
+- [Extension](#Extension)
+- [Percent](#Percent)
+- [Person](#Person)
+- [PersonalBest](#PersonalBest)
+- [Qualification](#Qualification)
+- [Ranking](#Ranking)
+- [Registration](#Registration)
+- [Result](#Result)
+- [Role](#Role)
+- [Room](#Room)
+- [Round](#Round)
+- [Schedule](#Schedule)
+- [Scramble](#Scramble)
+- [ScrambleSet](#ScrambleSet)
+- [TimeLimit](#TimeLimit)
+- [Venue](#Venue)
+
 ### Competition
 
 Represents the root object and is usually referred to as a WCIF.
