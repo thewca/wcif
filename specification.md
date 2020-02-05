@@ -1,5 +1,7 @@
 # WCIF
 
+*Version: 1.0*
+
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
 
@@ -503,7 +505,7 @@ Represents the competition data related to time and scheduling.
 
 ### Venue
 
-Represents schedule data relevant to a specific competition venue (physical place).
+Represents a physical location where the competition takes place.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
