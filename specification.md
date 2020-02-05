@@ -87,7 +87,7 @@ Represents a person related to the competition (not necessarily a competitor).
 | `email` | `String` | The person email address. *Note: this attribute is not public.* |
 | `avatar` | `Avatar\|null` | The person avatar image. |
 | `roles` | [`[Role]`](#role) | List of roles assigned to this person at the competition. |
-| `registration` | [`[Registration]`](#registration) | All the data related to the online registration for the competiftion. |
+| `registration` | [`[Registration]`](#registration)\|`null` | All the data related to the online registration for the competition. May be `null` if the person hasn't registered, but is still relevant to the competition (e.g. organizer, delegate). |
 | `assignments` | [`[Assignment]`](#assignment) | List of task assignments. |
 | `personalBests` | [`[PersonalBest]`](#personalbest) | List of official personal records. |
 
