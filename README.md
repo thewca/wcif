@@ -1,6 +1,6 @@
 # WCIF
 
-The official specification of the WCA Competition Interchange Format.
+The official specification of the [WCA Competition Interchange Format](./specification.md).
 
 ## Implementation notes
 
