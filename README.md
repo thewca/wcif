@@ -19,7 +19,13 @@ Publicly available (with the confidential attributes stripped out). *Note: the d
 
 Restricted to competition managers. Additionally, a `PATCH` request allows for saving the data (currently a significant subset of it).
 
-#### Limitations
+## Note on WCA Live
+
+In order to get up-to-date live results in the WCIF data, make sure you *Synchronize* on WCA Live.
+This action makes WCA Live save the data back to the WCA website,
+making it available for you when requesting one of the WCIF endpoints.
+
+## Limitations
 
 - Currently the WCA website returns `Person#registrantId` of `null`
 for people without a registration (e.g. non-participating organizer).
