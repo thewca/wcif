@@ -347,7 +347,7 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"ranking"\|"percent"\|"attemptResult"` | The type of advancement condition. Either of ranking (top N competitors), percent (top X% of competitors) or attempt result (competitors with attempt result better than Y). |
+| `type` | `"ranking"\|"percent"\|"attemptResult"` | The type of advancement condition. Either of ranking (top N competitors), percent (top X% of competitors) or attempt result (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `level` | [`[Ranking]`](#ranking)\|[`[Percent]`](percent)\|[`[AttemptResult]`](#attemptresult) | The parameter of advancement condition of the given type. |
 
 ### Ranking
