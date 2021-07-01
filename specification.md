@@ -395,8 +395,7 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
 | --- | --- | --- |
 | `whenDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which begins by this date, that is considered to have been set by this date. |
 | `type` | `"single"\|"average"\|"ranking"` | The type of result the requirement refers to. |
-| `attemptResult` | [`AttemptResult`](#attemptresult)\|`null` | The attempt result that needs to be beaten in order to qualify to register for the event. Required if `type` is "single" or "average". |
-| `ranking` | `Integer\|null` | The number of competitors to qualify for this event. Required if `type` is "ranking". |
+| `level` | [`AttemptResult`](#attemptresult)\|`Integer`\|null | The parameter of the qualification condition of the given type. |
 
 #### Examples
 
@@ -404,7 +403,7 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
 {
   "whenDate": "2020-04-25",
   "type": "single",
-  "attemptResult": 6000
+  "level": 6000
 }
 ```
 
@@ -412,7 +411,7 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
 {
   "whenDate": "2020-04-25",
   "type": "ranking",
-  "ranking": 50
+  "level": 50
 }
 ```
 
