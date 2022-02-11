@@ -1,6 +1,6 @@
 # WCIF
 
-*Version: 1.0*
+*Version: 1.1*
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
@@ -129,6 +129,7 @@ A `String` representing a role at the competition.
 
 The specification defines the following roles:
 - `"delegate"`
+- `"trainee_delegate"`
 - `"organizer"`
 
 Applications may define additional roles, however, other applications are not required to recognize or display these roles.
