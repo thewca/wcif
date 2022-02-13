@@ -129,7 +129,7 @@ A `String` representing a role at the competition.
 
 The specification defines the following roles:
 - `"delegate"`
-- `"trainee_delegate"`
+- `"trainee-delegate"`
 - `"organizer"`
 
 Applications may define additional roles, however, other applications are not required to recognize or display these roles.
