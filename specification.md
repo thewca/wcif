@@ -1,6 +1,6 @@
 # WCIF
 
-*Version: 1.1*
+*Version: 1.0*
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
