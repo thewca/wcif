@@ -464,7 +464,7 @@ Represents a set of scrambles used in the given round (in one or multiple simult
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `id` | `String` | The scramble set identifier, unique within the competition. |
+| `id` | `Integer` | The scramble set identifier, unique within the competition. |
 | `scrambles` | [`[Scramble]`](#scramble) | List of scrambles. |
 | `extraScrambles` | [`[Scramble]`](#scramble) | List of additional scrambles, used for extra attempts granted by the delegate. |
 
