@@ -29,7 +29,7 @@ making it available for you when requesting one of the WCIF endpoints.
 
 - Currently the WCA website returns `Person#registrantId` of `null`
 for people without a registration (e.g. non-participating organizer).
-- Currently the WCA website does not implement the following attributes: `Event#competitorLimit`, `Event#qualification`, `Round#scrambleSets`, `Activity#scrambleSetId`
+- Currently the WCA website does not implement the following attributes: `Event#competitorLimit`, `Activity#scrambleSetId`
 
 ## Examples
 
