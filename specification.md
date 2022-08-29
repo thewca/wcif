@@ -34,6 +34,7 @@ The specification defines the following types:
 - [Role](#Role)
 - [Room](#Room)
 - [Round](#Round)
+- [Series](#Series)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
 - [ScrambleSet](#ScrambleSet)
@@ -50,6 +51,7 @@ Represents the root object and is usually referred to as a WCIF.
 | `id` | `String` | The unique competition identifier. |
 | `name` | `String` | The full name of the competition. |
 | `shortName` | `String` | A briefer version of `name`, may be the same if `name` is already short. |
+| `series` | [`[Series\|null]`](#series) | The Competition Series that this competition is part of, if any. |
 | `persons` | [`[Person]`](#person) | List of all the people related to the competition. |
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
@@ -64,11 +66,35 @@ Represents the root object and is usually referred to as a WCIF.
   "id": "WC2019",
   "name": "WCA World Championship 2019",
   "shortName": "WCA WC 2019",
+  "series": {...},
   "persons": [...],
   "events": [...],
   "schedule": {...},
   "competitorLimit": 1000,
   "extensions": [...]
+}
+```
+
+
+### Series
+
+Represents a Competition Series as per the WCA Competition Requirements Policy.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `id` | `String` | The unique Competition Series identifer. |
+| `name` | `String` | The full name of the Competition Series. |
+| `shortName` | `String` | A briefer version of `name`, may be the same if `name` is already short. |
+| `competitionIds` | `[String]` | The identifiers of all competitions that are part of this series, ordered by start date. **Includes the current competition represented by this WCIF**. |
+
+#### Example
+
+```json
+{
+  "id": "AwesomeAustralianSeries2022",
+  "name": "An Absolutely Awesome Australian Series 2022",
+  "shortName": "Awesome Australian Series 2022",
+  "competitionIds": ["MyFirstAwesomeCompetition2022", "MySecondAwesomeCompetition2022", "MyThirdAwesomeCompetition2022"],
 }
 ```
 
