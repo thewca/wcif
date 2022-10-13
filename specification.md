@@ -434,7 +434,7 @@ Represents a competitor result in a single round.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `personId` | `String` | The corresponding person `registrantId`. |
+| `personId` | `Integer` | The corresponding person `registrantId`. |
 | `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
 | `attempts` | [`Attempt`](#attempt) | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
 | `best` | [`AttemptResult`](#attemptresult) | The best attempt result of `attempts`. |
