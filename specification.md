@@ -420,7 +420,7 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `whenDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which begins by this date, that is considered to have been set by this date. |
+| `whenDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
 | `type` | `"attemptResult"\|"ranking"\|"anyResult"` | The type of qualification. Either of ranking (top N competitors), attempt result (competitors with result better than Y - either single or average) or any result (competitors with any successful result of the given type). |
 | `resultType` | `"single"\|"average"` | The type of result the requirement refers to. |
 | `level` | [`AttemptResult`](#attemptresult)\|[`Ranking`](#ranking)\|`null` | The parameter of the qualification condition of the given type. Not used with `anyResult`. |
