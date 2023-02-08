@@ -92,6 +92,7 @@ Represents a person related to the competition (not necessarily a competitor).
 | `registration` | [`[Registration]`](#registration)\|`null` | All the data related to the online registration for the competition. May be `null` if the person hasn't registered, but is still relevant to the competition (e.g. organizer, delegate). |
 | `assignments` | [`[Assignment]`](#assignment) | List of task assignments. |
 | `personalBests` | [`[PersonalBest]`](#personalbest) | List of official personal records. |
+| `extensions` | [`[Extension]`](#extension) | List of custom person extensions. |
 
 #### Example
 
@@ -109,7 +110,8 @@ Represents a person related to the competition (not necessarily a competitor).
   "roles": [...],
   "registration": {...},
   "assignments": [...],
-  "personalBests": [...]
+  "personalBests": [...],
+  "extensions": [...]
 }
 ```
 
