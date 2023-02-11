@@ -82,7 +82,7 @@ Represents a Competition Series as per the WCA Competition Requirements Policy.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `id` | `String` | The unique Competition Series identifer. |
+| `id` | `String` | The unique Competition Series identifier. |
 | `name` | `String` | The full name of the Competition Series. |
 | `shortName` | `String` | A briefer version of `name`, may be the same if `name` is already short. |
 | `competitionIds` | `[String]` | The identifiers of all competitions that are part of this series, ordered by start date. **Includes the current competition represented by this WCIF**. |
@@ -680,7 +680,9 @@ The specification defines the following common IDs:
 |  Activity code | Name |
 | --- | --- |
 | `other-registration` | Registration at the venue. |
+| `other-checkin` | Check-in at the venue. |
 | `other-tutorial` | Tutorial for new competitors. |
+| `other-multi` | Submission of multi-blind cubes in advance of an attempt. |
 | `other-breakfast` | Breakfast time. |
 | `other-lunch` | Lunch time. |
 | `other-dinner` | Dinner time. |
