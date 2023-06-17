@@ -179,6 +179,7 @@ Represents person registration data.
 | `status` | `"accepted"\|"pending"\|"deleted"` | The status of the registration in the registration system. |
 | `guests` | `Integer` | The number of guests the person declared. *Note: this attribute is not public.* |
 | `comments` | `String` | The additional information typed during registration. *Note: this attribute is not public.* |
+| `administrativeNotes` | `String` | Additional information typed by an organizer or delegate as part of managing the registration. *Note: this attribute is not public.* |
 
 #### Example
 
@@ -188,7 +189,8 @@ Represents person registration data.
   "eventIds": ["333", "333fm", "444", "777"],
   "status": "accepted",
   "guests": 2,
-  "comments": "I would like to opt-in for the pizza."
+  "comments": "I would like to opt-in for the pizza.",
+  "administrativeNotes": "Emailed competitor on 05/08 to verify their date of birth"
 }
 ```
 
