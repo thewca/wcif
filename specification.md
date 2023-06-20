@@ -176,7 +176,7 @@ Represents person registration data.
 | --- | --- | --- |
 | `wcaRegistrationId` | `Integer` | The identifier of the registration in the WCA registration system. |
 | `eventIds` | `[String]` | List of identifiers of WCA events for which the person registered. |
-| `status` | `"accepted"\|"pending"\|"deleted"` | The status of the registration in the registration system. |
+| `status` | `"accepted"\|"pending"\|"deleted"\|"noncompeting"` | The status of the registration in the registration system. |
 | `guests` | `Integer` | The number of guests the person declared. *Note: this attribute is not public.* |
 | `comments` | `String` | The additional information typed during registration. *Note: this attribute is not public.* |
 | `administrativeNotes` | `String` | Additional information typed by an organizer or delegate as part of managing the registration. *Note: this attribute is not public.* |
