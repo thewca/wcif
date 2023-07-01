@@ -176,10 +176,11 @@ Represents person registration data.
 | --- | --- | --- |
 | `wcaRegistrationId` | `Integer` | The identifier of the registration in the WCA registration system. |
 | `eventIds` | `[String]` | List of identifiers of WCA events for which the person registered. |
-| `status` | `"accepted"\|"pending"\|"deleted"\|"noncompeting"` | The status of the registration in the registration system. |
+| `status` | `"accepted"\|"pending"\|"deleted"` | The status of the registration in the registration system. |
 | `guests` | `Integer` | The number of guests the person declared. *Note: this attribute is not public.* |
 | `comments` | `String` | The additional information typed during registration. *Note: this attribute is not public.* |
 | `administrativeNotes` | `String` | Additional information typed by an organizer or delegate as part of managing the registration. *Note: this attribute is not public.* |
+| `isCompeting` | `Boolean` | Whether this person is registered as a competitor. |
 
 #### Example
 
@@ -190,7 +191,8 @@ Represents person registration data.
   "status": "accepted",
   "guests": 2,
   "comments": "I would like to opt-in for the pizza.",
-  "administrativeNotes": "Emailed competitor on 05/08 to verify their date of birth"
+  "administrativeNotes": "Emailed competitor on 05/08 to verify their date of birth",
+  "isCompeting": true
 }
 ```
 
