@@ -19,6 +19,7 @@ The specification defines the following types:
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
+- [CurrencyCode](#CurrencyCode)
 - [Cutoff](#Cutoff)
 - [Date](#Date)
 - [DateTime](#DateTime)
@@ -31,6 +32,7 @@ The specification defines the following types:
 - [Qualification](#Qualification)
 - [Ranking](#Ranking)
 - [Registration](#Registration)
+- [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
 - [Role](#Role)
 - [Room](#Room)
@@ -57,6 +59,7 @@ Represents the root object and is usually referred to as a WCIF.
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
 | `location` | [`Location`](#location) | Data related to the competition's assigned location. |
+| `registrationInfo` | [`RegistrationInfo`](#registrationinfo) | Data related to when and how competitors can register for the competition. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the competition. |
 | `extensions` | [`[Extension]`](#extension) | List of custom competition extensions. |
 
@@ -153,6 +156,16 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 US
 ```
 
+### CurrencyCode
+
+A `String` representing the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code of the given currency.
+
+#### Example
+
+```json
+CAD
+```
+
 ### Role
 
 A `String` representing a role at the competition.
@@ -195,6 +208,28 @@ Represents person registration data.
   "comments": "I would like to opt-in for the pizza.",
   "administrativeNotes": "Emailed competitor on 05/08 to verify their date of birth",
   "isCompeting": true
+}
+```
+
+### RegistrationInfo
+
+Represents information related to when and how to register for the competition.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `registrationOpen` | [`DateTime`](#datetime) | The point in time when online registration opens. |
+| `registrationClose` | [`DateTime`](#datetime) | The point in time when online registration closes. |
+| `baseEntryFee` | `Integer` | The competition's base fee for online registration. |
+| `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`. |
+
+#### Example
+
+```json
+{
+  "registrationOpen": "2023-08-29T05:00:00Z",
+  "registrationClose": "2023-10-13T06:00:00Z",
+  "baseEntryFee": 20,
+  "currencyCode": "USD"
 }
 ```
 
