@@ -24,6 +24,7 @@ The specification defines the following types:
 - [DateTime](#DateTime)
 - [Event](#Event)
 - [Extension](#Extension)
+- [Location](#Location)
 - [Percent](#Percent)
 - [Person](#Person)
 - [PersonalBest](#PersonalBest)
@@ -55,6 +56,7 @@ Represents the root object and is usually referred to as a WCIF.
 | `persons` | [`[Person]`](#person) | List of all the people related to the competition. |
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
+| `location` | [`Location`](#location) | Data related to the competition's assigned location. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the competition. |
 | `extensions` | [`[Extension]`](#extension) | List of custom competition extensions. |
 
@@ -553,6 +555,32 @@ Represents the competition data related to time and scheduling.
   "startDate": "2020-06-12",
   "numberOfDays": 2,
   "venues": [...]
+}
+```
+
+### Location
+
+Represents the main location assigned to a competition. The `Location` may contain some data that overlaps with a competition [`Venue`](#Venue), but it is possible that no competition `Venue` contains the exact same data as the `Location` (e.g., for 3x3x3 Fewest Moves simultaneous competitions). Only the `Location` contains the `city` and `address`.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `name` | `String` | The name of the competition venue. |
+| `address` | `String` | The address of the competition venue. |
+| `city` | `String` | The city where the competition is located. |
+| `countryIso2` | [`CountryCode`](#countrycode) | The country where the competition is located. |
+| `latitudeMicrodegrees` | `Integer` | The geographic latitude of the competition in microdegrees (degrees times 10^6). |
+| `longitudeMicrodegrees` | `Integer` | The geographic longitude of the competition in microdegrees (degrees times 10^6). |
+
+#### Example
+
+```json
+{
+  "name": "Westin Harbour Castle Conference Centre",
+  "address": "11 Bay Street, Toronto, Ontario",
+  "cityName": "Toronto, Ontario",
+  "countryIso2": "CA",
+  "latitudeMicrodegrees": 43641740,
+  "longitudeMicrodegrees": 79376902
 }
 ```
 
