@@ -85,7 +85,7 @@ Represents a Competition Series as per the WCA Competition Requirements Policy.
 | `id` | `String` | The unique Competition Series identifier. |
 | `name` | `String` | The full name of the Competition Series. |
 | `shortName` | `String` | A briefer version of `name`, may be the same if `name` is already short. |
-| `competitionIds` | `[String]` | The identifiers of all competitions that are part of this series, ordered by start date. **Includes the current competition represented by this WCIF**. |
+| `competitionIds` | `[String]` | The identifiers of all competitions that are part of this series, ordered by start date. **Includes the current competition represented by this WCIF**. *Note: the public endpoint will filter out any unannounced competitions from this array, but the authorized endpoint will return the unfiltered array.* |
 
 #### Example
 
