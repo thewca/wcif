@@ -153,7 +153,7 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 #### Example
 
 ```json
-US
+"US"
 ```
 
 ### CurrencyCode
@@ -163,7 +163,7 @@ A `String` representing the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) c
 #### Example
 
 ```json
-CAD
+"CAD"
 ```
 
 ### Role
