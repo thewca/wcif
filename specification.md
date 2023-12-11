@@ -343,7 +343,7 @@ Represents a time under which an attempt(s) must be completed. See [regulation A
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `centiseconds` | `Integer` | The time. |
-| `cumulativeRoundIds` | `[String]` | An empty array the time limit applies to each attempt. |
+| `cumulativeRoundIds` | `[String]` | IDs of rounds sharing the same cumulative limit (they can be from different events). An empty array means the time limit applies to each attempt separately (no cumulative limit). |
 
 #### Example
 
