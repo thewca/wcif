@@ -566,7 +566,7 @@ Represents a physical location where the competition takes place.
 | `name` | `String` | The venue name. |
 | `latitudeMicrodegrees` | `Integer` | The geographic latitude of the venue in microdegrees (degrees times 10^6). |
 | `longitudeMicrodegrees` | `Integer` | The geographic longitude of the venue in microdegrees (degrees times 10^6). |
-| `countryIso2` | [`CountryCode`](#countrycode) | The country where the venue is locates. |
+| `countryIso2` | [`CountryCode`](#countrycode) | The country where the venue is located. |
 | `timezone` | `String` | The [Olson timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the venue. |
 | `rooms` | [`[Room]`](#room) | List of all the relevant rooms at the venue. |
 | `extensions` | [`[Extension]`](#extension) | List of custom competition extensions. |
