@@ -19,6 +19,7 @@ The specification defines the following types:
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
+- [CurrencyCode](#CurrencyCode)
 - [Cutoff](#Cutoff)
 - [Date](#Date)
 - [DateTime](#DateTime)
@@ -30,6 +31,7 @@ The specification defines the following types:
 - [Qualification](#Qualification)
 - [Ranking](#Ranking)
 - [Registration](#Registration)
+- [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
 - [Role](#Role)
 - [Room](#Room)
@@ -55,6 +57,7 @@ Represents the root object and is usually referred to as a WCIF.
 | `persons` | [`[Person]`](#person) | List of all the people related to the competition. |
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
+| `registrationInfo` | [`RegistrationInfo`] | All the data related to the competition's registration. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the competition. |
 | `extensions` | [`[Extension]`](#extension) | List of custom competition extensions. |
 
@@ -148,7 +151,17 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 #### Example
 
 ```json
-US
+"US"
+```
+
+### CurrencyCode
+
+A `String` representing the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code of the given currency.
+
+#### Example
+
+```json
+"CAD"
 ```
 
 ### Role
@@ -191,6 +204,32 @@ Represents person registration data.
   "guests": 2,
   "comments": "I would like to opt-in for the pizza.",
   "administrativeNotes": "Emailed competitor on 05/08 to verify their date of birth"
+}
+```
+
+### RegistrationInfo
+
+Represents information related to when and how to register for the competition.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `openTime` | [`DateTime`](#datetime) | The point in time when online registration opens. |
+| `closeTime` | [`DateTime`](#datetime) | The point in time when online registration closes. |
+| `baseEntryFee` | `Integer` | The competition's base fee for online registration. |
+| `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`. |
+| `competitorLimit` | `Integer` | The maximum number of competitors who can register for this competition. |
+| `walkInsPermitted` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. +
+
+#### Example
+
+```json
+{
+  "openTime": "2023-08-29T05:00:00Z",
+  "closeTime": "2023-11-18T05:00:00Z",
+  "baseEntryFee": 20,
+  "currencyCode": "USD",
+  "competitorLimit": 100,
+  "walkInsPermitted": false,
 }
 ```
 
