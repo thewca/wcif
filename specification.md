@@ -73,6 +73,7 @@ Represents the root object and is usually referred to as a WCIF.
   "persons": [...],
   "events": [...],
   "schedule": {...},
+  "registrationInfo": [...],
   "competitorLimit": 1000,
   "extensions": [...]
 }
