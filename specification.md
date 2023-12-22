@@ -219,7 +219,7 @@ Represents information related to when and how to register for the competition.
 | `baseEntryFee` | `Integer` | The competition's base fee for online registration. |
 | `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`. |
 | `competitorLimit` | `Integer` | The maximum number of competitors who can register for this competition. |
-| `walkInsPermitted` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. +
+| `onTheSpotRegistration` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. +
 
 #### Example
 
@@ -230,7 +230,7 @@ Represents information related to when and how to register for the competition.
   "baseEntryFee": 20,
   "currencyCode": "USD",
   "competitorLimit": 100,
-  "walkInsPermitted": false,
+  "onTheSpotRegistration": false,
 }
 ```
 
