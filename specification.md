@@ -218,7 +218,6 @@ Represents information related to when and how to register for the competition.
 | `closeTime` | [`DateTime`](#datetime) | The point in time when online registration closes. |
 | `baseEntryFee` | `Integer` | The competition's base fee for online registration. |
 | `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`. |
-| `competitorLimit` | `Integer` | The maximum number of competitors who can register for this competition. |
 | `onTheSpotRegistration` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. +
 
 #### Example
@@ -229,7 +228,6 @@ Represents information related to when and how to register for the competition.
   "closeTime": "2023-11-18T05:00:00Z",
   "baseEntryFee": 20,
   "currencyCode": "USD",
-  "competitorLimit": 100,
   "onTheSpotRegistration": false,
 }
 ```
