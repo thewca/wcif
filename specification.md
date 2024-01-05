@@ -664,9 +664,9 @@ Here are some valid WCA activity codes for 3x3x3 Multi-Blind (in decreasing spec
 |  Activity code | Name |
 | --- | --- |
 | `333mbf-r1-g3-a2` | 3x3x3 Multi-Blind, Round 1, Attempt 2, Group 3 |
-| `333-r1-a2` | 3x3x3 Multi-Blind, Round 1, Attempt 2 (any group) |
-| `333-r1` | 3x3x3 Multi-Blind, Round 1 |
-| `333` | 3x3x3 Multi-Blind |
+| `333mbf-r1-a2` | 3x3x3 Multi-Blind, Round 1, Attempt 2 (any group) |
+| `333mbf-r1` | 3x3x3 Multi-Blind, Round 1 |
+| `333mbf` | 3x3x3 Multi-Blind |
 
 Activities may be nested. If an activity A contains a child activity B, then activity B's code must contain all items from the parent activity's code.
 
