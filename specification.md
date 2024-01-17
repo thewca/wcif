@@ -19,17 +19,20 @@ The specification defines the following types:
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
+- [CurrencyCode](#CurrencyCode)
 - [Cutoff](#Cutoff)
 - [Date](#Date)
 - [DateTime](#DateTime)
 - [Event](#Event)
 - [Extension](#Extension)
+- [Location](#Location)
 - [Percent](#Percent)
 - [Person](#Person)
 - [PersonalBest](#PersonalBest)
 - [Qualification](#Qualification)
 - [Ranking](#Ranking)
 - [Registration](#Registration)
+- [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
 - [Role](#Role)
 - [Room](#Room)
@@ -55,6 +58,8 @@ Represents the root object and is usually referred to as a WCIF.
 | `persons` | [`[Person]`](#person) | List of all the people related to the competition. |
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
+| `location` | [`Location`](#location) | Data related to the competition's assigned location. |
+| `registrationInfo` | [`RegistrationInfo`](#registrationinfo) | Data related to when and how competitors can register for the competition. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the competition. |
 | `extensions` | [`[Extension]`](#extension) | List of custom competition extensions. |
 
@@ -148,7 +153,17 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 #### Example
 
 ```json
-US
+"US"
+```
+
+### CurrencyCode
+
+A `String` representing the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code of the given currency.
+
+#### Example
+
+```json
+"CAD"
 ```
 
 ### Role
@@ -193,6 +208,28 @@ Represents person registration data.
   "comments": "I would like to opt-in for the pizza.",
   "administrativeNotes": "Emailed competitor on 05/08 to verify their date of birth",
   "isCompeting": true
+}
+```
+
+### RegistrationInfo
+
+Represents information related to when and how to register for the competition.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `registrationOpen` | [`DateTime`](#datetime) | The point in time when online registration opens. |
+| `registrationClose` | [`DateTime`](#datetime) | The point in time when online registration closes. |
+| `baseEntryFee` | `Integer` | The competition's base fee for online registration. |
+| `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`. |
+
+#### Example
+
+```json
+{
+  "registrationOpen": "2023-08-29T05:00:00Z",
+  "registrationClose": "2023-10-13T06:00:00Z",
+  "baseEntryFee": 20,
+  "currencyCode": "USD"
 }
 ```
 
@@ -553,6 +590,32 @@ Represents the competition data related to time and scheduling.
   "startDate": "2020-06-12",
   "numberOfDays": 2,
   "venues": [...]
+}
+```
+
+### Location
+
+Represents the main location assigned to a competition. The `Location` may contain some data that overlaps with a competition [`Venue`](#Venue), but it is possible that no competition `Venue` contains the exact same data as the `Location` (e.g., for 3x3x3 Fewest Moves simultaneous competitions). Only the `Location` contains the `city` and `address`.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `name` | `String` | The name of the competition venue. |
+| `address` | `String` | The address of the competition venue. |
+| `city` | `String` | The city where the competition is located. |
+| `countryIso2` | [`CountryCode`](#countrycode) | The country where the competition is located. |
+| `latitudeMicrodegrees` | `Integer` | The geographic latitude of the competition in microdegrees (degrees times 10^6). |
+| `longitudeMicrodegrees` | `Integer` | The geographic longitude of the competition in microdegrees (degrees times 10^6). |
+
+#### Example
+
+```json
+{
+  "name": "Westin Harbour Castle Conference Centre",
+  "address": "11 Bay Street, Toronto, Ontario",
+  "cityName": "Toronto, Ontario",
+  "countryIso2": "CA",
+  "latitudeMicrodegrees": 43641740,
+  "longitudeMicrodegrees": 79376902
 }
 ```
 
