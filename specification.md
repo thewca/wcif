@@ -216,7 +216,7 @@ Represents information related to when and how to register for the competition.
 | --- | --- | --- |
 | `openTime` | [`DateTime`](#datetime) | The point in time when online registration opens. |
 | `closeTime` | [`DateTime`](#datetime) | The point in time when online registration closes. |
-| `baseEntryFeeiLowestDenomination` | `Integer` | The competition's base fee for online registration, in the lowest denomination of the specified currency code. |
+| `baseEntryFeeLowestDenomination` | `Integer` | The competition's base fee for online registration, in the lowest denomination of the specified currency code. |
 | `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`, following ISO 4217. |
 | `onTheSpotRegistration` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. |
 | `usesWcaRegistration` | `Boolean` | Whether registration takes place on the WCA website |
