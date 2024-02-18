@@ -219,7 +219,7 @@ Represents information related to when and how to register for the competition.
 | `baseEntryFeeiLowestDenomination` | `Integer` | The competition's base fee for online registration, in the lowest denomination of the specified currency code. |
 | `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`, following ISO 4217. |
 | `onTheSpotRegistration` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. |
-| `usesWcaRegistration` | `Boolean` | Wthether registration takes place on the WCA website |
+| `usesWcaRegistration` | `Boolean` | Whether registration takes place on the WCA website |
 
 #### Example
 
