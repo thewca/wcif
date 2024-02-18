@@ -230,7 +230,7 @@ Represents information related to when and how to register for the competition.
   "baseEntryFeeLowestDenomination": 2000,
   "currencyCode": "USD",
   "onTheSpotRegistration": false,
-  "usesWcaRegistration": true,
+  "useWcaRegistration": true,
 }
 ```
 
