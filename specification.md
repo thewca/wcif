@@ -216,7 +216,7 @@ Represents information related to when and how to register for the competition.
 | --- | --- | --- |
 | `openTime` | [`DateTime`](#datetime) | The point in time when online registration opens. |
 | `closeTime` | [`DateTime`](#datetime) | The point in time when online registration closes. |
-| `baseEntryFeeLowestDenomination` | `Integer` | The competition's base fee for online registration, in the lowest denomination of the specified currency code. |
+| `baseEntryFeeIso` | `Integer` | The competition's base fee for online registration, in the lowest denomination of the specified currency code, following ISO 4217. |
 | `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`, following ISO 4217. |
 | `onTheSpotRegistration` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. |
 | `useWcaRegistration` | `Boolean` | Whether registration takes place on the WCA website. |
@@ -227,7 +227,7 @@ Represents information related to when and how to register for the competition.
 {
   "openTime": "2023-08-29T05:00:00Z",
   "closeTime": "2023-11-18T05:00:00Z",
-  "baseEntryFeeLowestDenomination": 2000,
+  "baseEntryFeeIso": 2000,
   "currencyCode": "USD",
   "onTheSpotRegistration": false,
   "useWcaRegistration": true,
