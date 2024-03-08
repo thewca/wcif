@@ -19,6 +19,7 @@ The specification defines the following types:
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
+- [CurrencyCode](#CurrencyCode)
 - [Cutoff](#Cutoff)
 - [Date](#Date)
 - [DateTime](#DateTime)
@@ -30,6 +31,7 @@ The specification defines the following types:
 - [Qualification](#Qualification)
 - [Ranking](#Ranking)
 - [Registration](#Registration)
+- [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
 - [Role](#Role)
 - [Room](#Room)
@@ -55,6 +57,7 @@ Represents the root object and is usually referred to as a WCIF.
 | `persons` | [`[Person]`](#person) | List of all the people related to the competition. |
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
+| `registrationInfo` | [`RegistrationInfo`] | All the data related to the competition's registration. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the competition. |
 | `extensions` | [`[Extension]`](#extension) | List of custom competition extensions. |
 
@@ -70,6 +73,7 @@ Represents the root object and is usually referred to as a WCIF.
   "persons": [...],
   "events": [...],
   "schedule": {...},
+  "registrationInfo": [...],
   "competitorLimit": 1000,
   "extensions": [...]
 }
@@ -148,7 +152,17 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 #### Example
 
 ```json
-US
+"US"
+```
+
+### CurrencyCode
+
+A `String` representing the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code of the given currency.
+
+#### Example
+
+```json
+"CAD"
 ```
 
 ### Role
@@ -195,6 +209,34 @@ Represents person registration data.
   "isCompeting": true
 }
 ```
+
+### RegistrationInfo
+
+Represents information related to when and how to register for the competition.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `openTime` | [`DateTime`](#datetime) | The point in time when online registration opens. |
+| `closeTime` | [`DateTime`](#datetime) | The point in time when online registration closes. |
+| `baseEntryFee` | `Integer` | The competition's base fee for online registration, in the lowest denomination of the specified currency code, following ISO 4217. |
+| `currencyCode` | [`CurrencyCode`](#currencycode) | The currency of the `baseEntryFee`, following ISO 4217. |
+| `onTheSpotRegistration` | `Boolean` | Whether non-registered competitors are permitted to sign up at the competition. |
+| `useWcaRegistration` | `Boolean` | Whether registration takes place on the WCA website. |
+
+#### Example
+
+```json
+{
+  "openTime": "2023-08-29T05:00:00Z",
+  "closeTime": "2023-11-18T05:00:00Z",
+  "baseEntryFee": 2000,
+  "currencyCode": "USD",
+  "onTheSpotRegistration": false,
+  "useWcaRegistration": true,
+}
+```
+
+In this example, the registration fee is $20.00 USD, because the lowest denomination of USD is cents ($0.01 USD).
 
 ### Avatar
 
