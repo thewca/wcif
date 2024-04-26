@@ -328,7 +328,7 @@ Represents data of an event held at the competition.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `id` | `String` | The WCA event identifier. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/WcaOnRails/db/seeds/events.seeds.rb) for the list of all the WCA events. |
+| `id` | `String` | The WCA event identifier. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/db/seeds/events.seeds.rb) for the list of all the WCA events. |
 | `rounds` | [`[Round]`](#round) | List of rounds of the event held at the competition. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the event. |
 | `qualification` | [`Qualification`](#qualification)\|`null` | The requirement that a person must meet in order to register for the event. |
@@ -353,7 +353,8 @@ Represents data of a round held at the competition.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `id` | `String` | The round identifier of the form `{eventId}-r{roundNumber}`. *Note: this is a valid [`ActivityCode`](#activitycode).* |
-| `format` | `"1"\|"2"\|"3"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/WcaOnRails/db/seeds/formats.seeds.rb) for the list of all the WCA formats. |
+| `format` | `"1"\|"2"\|"3"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/db/seeds/formats.seeds.rb) for the list of all the WCA formats. |
+| `roundType` | `"0"\|"1"\|"2"\|"3"\|"b"\|"c"\|"d"\|"e"\|"f"\|"g"\|"h"` | The round type. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/db/seeds/round_types.seeds.rb) for the list of all the WCA round types. (In essence, a Round Type describes this round in relation to other rounds of this competition.) |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
 | `advancementCondition` | [`AdvancementCondition`](#advancementcondition)\|`null` | The condition specifying which competitors advance to the next round. |
