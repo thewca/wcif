@@ -29,6 +29,7 @@ The specification defines the following types:
 - [Person](#Person)
 - [PersonalBest](#PersonalBest)
 - [Qualification](#Qualification)
+- [QualificationResult](#QualificationResult)
 - [Ranking](#Ranking)
 - [Registration](#Registration)
 - [RegistrationInfo](#RegistrationInfo)
@@ -501,6 +502,27 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
   "level": null
 }
 ```
+
+### QualificationResult
+
+Represents a user's best result by a given date (up to and including the given date) for the purposes of determining whether they meet the [`Qualification`](#qualification) for a given event. 
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `eventId` | `[String]` | Identifier for the WCA event to which the QualificationResult relates. |
+| `type` | `"single"\|"average"\` | The type of qualification result. Either single (the best single solve by the competitor) or average (the best average result achieved by the competitor). |
+| `best` | [`AttemptResult`](#attemptresult) | The value of the qualification result - usually an integer representing seconds, but an integer representing an encoded result in the case of 333 multi-blind. |
+| `on_or_before` | [`Date`](#date) | The date by which the result was achieved for qualification purposes. Note that this is NOT the date on which the result took place. |
+
+#### Examples
+
+```json
+{
+  "eventId": "333",
+  "type": "single",
+  "best": 6000
+  "on_or_before": "2020-04-25"
+}
 
 ### Result
 
