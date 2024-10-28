@@ -506,7 +506,7 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
 
 Represents a competitor result in a single round.
 
-| Attribute | Type                              | Description |
+| Attribute | Type | Description |
 | --- | --- | --- |
 | `personId` | `Integer` | The corresponding person `registrantId`. |
 | `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
