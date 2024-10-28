@@ -507,10 +507,10 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
 Represents a competitor result in a single round.
 
 | Attribute | Type                              | Description |
-| --- |-----------------------------------| --- |
-| `personId` | `Integer`                         | The corresponding person `registrantId`. |
-| `ranking` | `Integer\|null`                   | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
-| `attempts` | [`[Attempt]`](#attempt)           | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
+| --- | --- | --- |
+| `personId` | `Integer` | The corresponding person `registrantId`. |
+| `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
+| `attempts` | [`[Attempt]`](#attempt) | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
 | `best` | [`AttemptResult`](#attemptresult) | The best attempt result of `attempts`. |
 | `average` | [`AttemptResult`](#attemptresult) | The average attempt result of `attempts` (depending on the format, either average of 5 or mean of 3). |
 
