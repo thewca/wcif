@@ -33,4 +33,4 @@ for people without a registration (e.g. non-participating organizer).
 
 ## Examples
 
-There are many applications using the WCIF format already. Those include the ones listed on the [Software tools page](https://www.worldcubeassociation.org/score-tools).
+There are many applications using the WCIF format already. Those include the ones listed on the [Score tools page](https://www.worldcubeassociation.org/score-tools).
