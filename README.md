@@ -33,9 +33,4 @@ for people without a registration (e.g. non-participating organizer).
 
 ## Examples
 
-There are many applications using the WCIF format already, those include:
-- [WCA Live](https://github.com/thewca/wca-live)
-- [Groupifier](https://github.com/jonatanklosko/groupifier)
-- [Scrambles Matcher](https://github.com/viroulep/scrambles-matcher)
-- [TNoodle](https://github.com/thewca/tnoodle)
-- [WCIF Scripts](https://github.com/jonatanklosko/wcif-scripts)
+There are many applications using the WCIF format already. Those include the ones listed on the [Score tools page](https://www.worldcubeassociation.org/score-tools).
