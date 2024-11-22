@@ -431,7 +431,7 @@ An `Integer` number of competitors.
 
 ### Percent
 
-An `Integer` (between 0 and 100, inclusive) representing a percent of competitors (rounded down to the nearest integer).
+An `Integer` (between 0 and 75, inclusive, per [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1)) representing a percentage of competitors (rounded down to the nearest integer) who will advance to the next round.
 
 ### AttemptResult
 
