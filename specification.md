@@ -735,6 +735,8 @@ The specification defines the following common IDs:
 | `other-lunch` | Lunch time. |
 | `other-dinner` | Dinner time. |
 | `other-awards` | Awards ceremony. |
+| `other-setup` | Venue setup. |
+| `other-teardown` | Venue teardown. |
 | `other-unofficial-{activityCode}` | Unofficial event. The activity code should follow the rules above, except that the event id will be competition-specific. Where possible, the event ids listed [here](http://cubing.github.io/icons) are recommended. For example, `other-unofficial-magic-r1-g3` is a possible activity code. |
 
 All other activities not defined by the specification should use either `other-misc` or `other-misc-{id}`.
