@@ -786,7 +786,7 @@ by allowing developers to introduce new fields before they are proven to be gene
 ```json
 {
   "id": "org.someapplication.Stage",
-  "specUri": "https://someapplication.org/wcif/stage.json",
+  "specUrl": "https://someapplication.org/wcif/stage.json",
   "data": {
     "timingStations": 16,
     "area": 50
