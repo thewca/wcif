@@ -5,7 +5,7 @@ The official specification of the [WCA Competition Interchange Format](./specifi
 ## Implementation notes
 
 Currently the WCA website implements most of the specification.
-The WCIF data for the given competition can be obtained via the following endpoints these will return:
+The WCIF data for the given competition can be obtained via the following endpoints:
 
 ###### Public endpoint
 
