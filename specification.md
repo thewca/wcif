@@ -1,9 +1,28 @@
 # WCIF
 
-*Version: 1.0*
+WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
+It's designed as a way for many applications to exchange data in a standardized manner.
+
+## Version
+- Number: 2.0
+- Status: Latest
+- Next Status: Stable
+- Status Advancement Date: 2026-01-01 (TODO: This is just suggested - chat to 3rd-party devs to decide)
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
+
+If you intend to read/write WCIF from the WCA website in your application, please:
+- Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md)
+- Sign up to our developer mailing list to receive updates about new versions and deprecations. (TODO: Link to waiting list signup)
+- Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
+
+## Changelog from v1.0
+
+Changes from v1.0 are as follows:
+- Added value `5` to `round.format` enum
+- Added value `all` to `advancementCondition.type` (TODO: Placeholder for final change)
+- Added field `is_dual` to `advancementCondition` (TODO: Placeholder for final change)
 
 ## Objects
 
@@ -353,7 +372,7 @@ Represents data of a round held at the competition.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `id` | `String` | The round identifier of the form `{eventId}-r{roundNumber}`. *Note: this is a valid [`ActivityCode`](#activitycode).* |
-| `format` | `"1"\|"2"\|"3"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/WcaOnRails/db/seeds/formats.seeds.rb) for the list of all the WCA formats. |
+| `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/WcaOnRails/db/seeds/formats.seeds.rb) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
 | `advancementCondition` | [`AdvancementCondition`](#advancementcondition)\|`null` | The condition specifying which competitors advance to the next round. |
