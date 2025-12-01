@@ -4,17 +4,17 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 2.0
+- Number: 1.1
 - Status: Latest
 - Next Status: Stable
-- Status Advancement Date: 2025-12-15
+- Status Advancement Date: 2025-12-07
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 If you intend to read/write WCIF from the WCA website in your application, please:
 - Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md)
-- Sign up to our developer mailing list to receive updates about new versions and deprecations. (TODO: Link to waiting list signup)
+- Sign up to our developer mailing list to receive updates about new versions and deprecations. (TODO: Link to mailing list signup)
 - Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
 ## Changelog from v1.0
