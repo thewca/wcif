@@ -14,7 +14,7 @@ It's designed as a way for many applications to exchange data in a standardized 
 
 If you intend to read/write WCIF from the WCA website in your application, please:
 - Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md)
-- Sign up to our developer mailing list to receive updates about new versions and deprecations. (TODO: Link to mailing list signup)
+- [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
 - Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
 ## Changelog from v1.0
