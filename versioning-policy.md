@@ -24,11 +24,9 @@ There are several stages of a version lifecycle, specified by `version_status` f
 ## Requesting Specific Versions
 The existing WCIF endpoints will remain, and always serve the `stable` version of WCIF.
 
-Currently, these are not available - but we intend to add two new ways of querying WCIF: 
+The following endpoints are not yet available, but will be implemented when we increment to v2.0 - this is expected in Q1 2026.
 - `api/v0/competitions/{competition-id}/wcif/{lifecycle-name}` to request the latest, or beta versions
 - `api/v0/competitions/{competition-id}/wcif/version/{version-number}` to request a specific version number
-
-Support for this is expected by early 2026, and will be announced with a minor version update and change to this policy.
 
 ## Backwards Compatibility  
 - In general, we aim to align with Google's [API-180](https://google.aip.dev/180) - feel free to raise concerns with us by opening a Github issue if you feel we deviate from this
