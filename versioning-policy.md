@@ -4,10 +4,12 @@ We will follow [SemVer](https://semver.org/)’s Major.Minor.Patch format, defin
 - **Major**: increments upon _breaking changes_ - ie, changes that would cause errors in implementations relying on the current latest version
     - Removing or renaming a field
     - Changing a field’s type, or removing previously-available enum values
-    - Adding new field(s)/values which cannot be mapped to previous values
+    - Major changes in business logic - such as the addition of a new round format or advancement type.[^1]
 - **Minor**: increments upon the addition of new functionality that maintains _forward compatibility_ - ie, existing implementations can continue without error
     - Adding a new field, adding values to an existing enum
 - **Patch**: a change which does not meaningfully alter API output - for example, bugfixes that alter incorrect behaviour to align with documented behaviour
+
+[^1] Sometimes these changes may "just" take the form of a new enum value, which would usually be handled by a Minor version increment. In certain cases, however, the change to business logic is significant enough to mandate a Major version change, to ensure that backwards-compatibility doesn't allow third-party tools to create undesireable outcomes (such as incorrectly determining round advancement from a new round advancement criterion). 
 
 ## Version Lifecycle
 
@@ -22,9 +24,11 @@ There are several stages of a version lifecycle, specified by `version_status` f
 ## Requesting Specific Versions
 The existing WCIF endpoints will remain, and always serve the `stable` version of WCIF.
 
-Two new ways of querying WCIF will be added: 
+Currently, these are not available - but we intend to add two new ways of querying WCIF: 
 - `api/v0/competitions/{competition-id}/wcif/{lifecycle-name}` to request the latest, or beta versions
 - `api/v0/competitions/{competition-id}/wcif/version/{version-number}` to request a specific version number
+
+Support for this is expected by early 2026, and will be announced with a minor version update and change to this policy.
 
 ## Backwards Compatibility  
 - In general, we aim to align with Google's [API-180](https://google.aip.dev/180) - feel free to raise concerns with us by opening a Github issue if you feel we deviate from this

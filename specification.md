@@ -5,9 +5,9 @@ It's designed as a way for many applications to exchange data in a standardized 
 
 ## Version
 - Number: 1.1
-- Status: Latest
-- Next Status: Stable
-- Status Advancement Date: 2025-12-07
+- Status: Stable
+- Next Status: Deprecated
+- Status Advancement Date: N/A
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
@@ -20,7 +20,7 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 ## Changelog from v1.0
 
 Changes from v1.0 are as follows:
-- Added value `5` to `round.format` enum - `5` corresponds to a Best of 5 format as described in the 2026 regulations.
+- Added value `5` to `round.format` enum - `5` corresponds to a Best of 5 format as described in the [2026 Regulation Changes](https://github.com/thewca/wca-regulations-january-2026/pull/48).
 
 ## Objects
 
