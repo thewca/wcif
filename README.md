@@ -2,10 +2,14 @@
 
 The official specification of the [WCA Competition Interchange Format](./specification.md).
 
+## Versioning
+
+This document is for v1.1, the current `latest` version of WCIF. See [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md) for more information.
+
 ## Implementation notes
 
 Currently the WCA website implements most of the specification.
-The WCIF data for the given competition can be obtained via the following endpoints:
+The WCIF data for the given competition can be obtained via the following endpoints[^1]:
 
 ###### Public endpoint
 
@@ -18,6 +22,8 @@ Publicly available (with the confidential attributes stripped out). *Note: the d
 `https://worldcubeassociation.org/api/v0/competitions/:competition_id/wcif`
 
 Restricted to competition managers. Additionally, a `PATCH` request allows for saving the data (currently a significant subset of it).
+
+[^1] These will always return the latest stable version - see [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md) to request a specific version.
 
 ## Note on WCA Live
 

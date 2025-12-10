@@ -1,9 +1,26 @@
 # WCIF
 
-*Version: 1.0*
+WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
+It's designed as a way for many applications to exchange data in a standardized manner.
+
+## Version
+- Number: 1.1
+- Status: Stable
+- Next Status: Deprecated
+- Status Advancement Date: N/A
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
+
+If you intend to read/write WCIF from the WCA website in your application, please:
+- Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md)
+- [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
+- Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
+
+## Changelog from v1.0
+
+Changes from v1.0 are as follows:
+- Added value `5` to `round.format` enum - `5` corresponds to a Best of 5 format as described in the [2026 Regulation Changes](https://github.com/thewca/wca-regulations-january-2026/pull/48).
 
 ## Objects
 
@@ -328,7 +345,7 @@ Represents data of an event held at the competition.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `id` | `String` | The WCA event identifier. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/WcaOnRails/db/seeds/events.seeds.rb) for the list of all the WCA events. |
+| `id` | `String` | The WCA event identifier. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/events.json) for the list of all the WCA events. |
 | `rounds` | [`[Round]`](#round) | List of rounds of the event held at the competition. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the event. |
 | `qualification` | [`Qualification`](#qualification)\|`null` | The requirement that a person must meet in order to register for the event. |
@@ -353,7 +370,7 @@ Represents data of a round held at the competition.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `id` | `String` | The round identifier of the form `{eventId}-r{roundNumber}`. *Note: this is a valid [`ActivityCode`](#activitycode).* |
-| `format` | `"1"\|"2"\|"3"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/master/WcaOnRails/db/seeds/formats.seeds.rb) for the list of all the WCA formats. |
+| `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
 | `advancementCondition` | [`AdvancementCondition`](#advancementcondition)\|`null` | The condition specifying which competitors advance to the next round. |
