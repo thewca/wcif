@@ -13,7 +13,7 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 If you intend to read/write WCIF from the WCA website in your application, please:
-- Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md)
+- Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/stable/versioning-policy.md)
 - [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
 - Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
