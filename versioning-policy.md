@@ -1,3 +1,7 @@
+## Mailing List 
+
+Sign up in your [profile preferences](https://www.worldcubeassociation.org/profile/edit?section=preferences) to our developer mailing list to receive updates about new versions and deprecations.
+
 ## Version Numbering
 
 We will follow [SemVer](https://semver.org/)’s Major.Minor.Patch format, defined as follows: 
