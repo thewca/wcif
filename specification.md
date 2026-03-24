@@ -189,7 +189,7 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Either type \n-`ranking` (Top N competitors) \n-`resultAchieved` (a single/average ResultValue achieved by the competitor), or \n-`percent` (top n% of competitors). |
+| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Either type <br>-`ranking` (Top N competitors) <br>-`resultAchieved` (a single/average ResultValue achieved by the competitor), or <br>-`percent` (top n% of competitors). |
 | `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` `type`s. |
 | `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the Condition. |
 
