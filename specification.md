@@ -189,8 +189,8 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Either type <br>-`ranking` (Top N competitors) <br>-`resultAchieved` (a single/average ResultValue achieved by the competitor), or <br>-`percent` (top n% of competitors). |
-| `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` `type`s. |
+| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Options are: <br>-`ranking` (Top N competitors) <br>-`resultAchieved` (a single/average ResultValue achieved by the competitor), or <br>-`percent` (top n% of competitors). |
+| `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` types. |
 | `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the Condition. |
 
 ### Condition - Option 3
@@ -673,7 +673,30 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
 
 ### ReservedPlaces
 
+Places in a finals reserved for competitors from the nationality or continent hosting the competition, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b).
 
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `nationalities` | `[Strings]` | List of all ISO-3166-1 country codes for whom reservations are in effect. |
+| `count` | `Integer` | The number of places reserved for competitors from the `nationalities` list. Note that the reserved places are shared across all listed nationalities - the Top N competitors from _all_ listed countries will fill the reserved places.  |
+
+#### Example
+
+```json
+// Argentina national championship - reservations are only in effect for the hosting country of Germany
+{
+  "nationalities": ["AR"],
+  "reservations": 8
+}
+```
+
+```json
+// South American continental championship - all European countries are listed for reservations
+{
+  "nationalities": ["AR", "BO", "BR", "CL", "CO", "EC", "GY", "PY", "PE", "SR", "UY", "VE", "XS"],
+  "reservations": 8
+}
+```
 
 ### Result
 
