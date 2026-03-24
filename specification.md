@@ -4,10 +4,10 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 1.1
-- Status: Stable
-- Next Status: Deprecated
-- Status Advancement Date: N/A
+- Number: 2.0.0
+- Status: Latest
+- Next Status: Stable
+- Status Advancement Date: 2026-04-09
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
@@ -373,7 +373,7 @@ Represents data of a round held at the competition.
 | `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
-| `advancementCondition` | [`AdvancementCondition`](#advancementcondition)\|`null` | The condition specifying which competitors advance to the next round. |
+| `participationCondition` | [`ParticipationCondition`](#participationcondition) | Specifies how the round should determine which comeptitors participate in it. |
 | `results` | [`[Result]`](#result) | List of all round results. |
 | `scrambleSetCount` | `Integer` | The number of scramble sets needed for this round. |
 | `scrambleSets` | [`[ScrambleSet]`](#scrambleset) | List of scramble sets used in this round. |
@@ -387,7 +387,7 @@ Represents data of a round held at the competition.
   "format": "a",
   "timeLimit": {...},
   "cutoff": {...},
-  "advancementCondition": {...},
+  "participationCondition": {...},
   "results": [...],
   "scrambleSetCount": 4,
   "scrambleSets": [...],
@@ -431,16 +431,76 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 }
 ```
 
-### AdvancementCondition
+### ParticipationCondition
 
-Represents a requirement a competitor must satisfy in the given round in order to advance to the next round of the event.
+Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) to include should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
-Regardless of the advancement condition type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
+Regardless of the participation condition type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"ranking"\|"percent"\|"attemptResult"` | The type of advancement condition. Either of ranking (top N competitors), percent (top X% of competitors) or attempt result (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
-| `level` | [`Ranking`](#ranking)\|[`Percent`](#percent)\|[`AttemptResult`](#attemptresult) | The parameter of advancement condition of the given type. |
+| `source` | [`AttemptResult`](#participationcondition-attemptresult)\|[`Percent`](#participationcondition-percent)\|[`Ranking`](#participationcondition-ranking)\|[`Registrations`](#participationcondition-registrations) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
+
+#### Example - Normal (Non-Dual) Rounds
+
+```json
+{
+  "competitions.events.rounds.333-r1.participationCondition": {
+    "source": {
+      "type": "registrations"
+    }
+    "reservedPlaces": {...}
+  }
+}
+
+{
+  "competitions.events.rounds.333-r2.participationCondition": {
+    "source": {
+      "type": "percent",
+      "roundIds": ["333-r1"],
+      "percent": 75
+    }
+    "reservedPlaces": {...}
+  }
+}
+
+```
+
+#### Example - Dual Rounds
+
+```json
+// Rounds 1 and 2 use the same `source`, as they both draw from Registrations
+{ "competitions.events.rounds.333-r1||2.participationCondition": {
+    "source": { 
+      "type": "registrations"
+    },
+    "reservedPlaces": {...}
+  }
+}
+
+// Round 3 draws from the best result for each competitor of all rounds contained in its `roundIds` field
+{ 
+  "competitions.events.rounds.333-r3.participationCondition": {
+    "source": {
+      "type": "ranking"
+      "roundIds": ["333-r1", "333-r2"]
+      "ranking": 16
+    },
+    "reservedPlaces": {...}
+}
+```
+
+
+### ParticipationCondition-AttemptResult
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `source` | `"registrations"\|"ranking"\|"percent"\|"attemptResult"` | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+
+### ParticipationCondition-Percent
+### ParticipationCondition-Ranking
+### ParticipationCondition-Registrations
 
 ### Ranking
 
