@@ -17,10 +17,9 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 - [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
 - Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
-## Changelog from v1.0
+## Changelog from v1.1
 
-Changes from v1.0 are as follows:
-- Added value `5` to `round.format` enum - `5` corresponds to a Best of 5 format as described in the [2026 Regulation Changes](https://github.com/thewca/wca-regulations-january-2026/pull/48).
+Changes from v1.1 are as follows:
 
 ## Objects
 
@@ -28,11 +27,9 @@ The specification defines the following types:
 
 - [Activity](#Activity)
 - [ActivityCode](#ActivityCode)
-- [AdvancementCondition](#AdvancementCondition)
 - [Assignment](#Assignment)
 - [AssignmentCode](#AssignmentCode)
 - [Attempt](#Attempt)
-- [AttemptResult](#AttemptResult)
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
@@ -42,11 +39,9 @@ The specification defines the following types:
 - [DateTime](#DateTime)
 - [Event](#Event)
 - [Extension](#Extension)
-- [Percent](#Percent)
 - [Person](#Person)
 - [PersonalBest](#PersonalBest)
 - [Qualification](#Qualification)
-- [Ranking](#Ranking)
 - [Registration](#Registration)
 - [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
@@ -54,6 +49,11 @@ The specification defines the following types:
 - [Room](#Room)
 - [Round](#Round)
 - [Series](#Series)
+- [ParticipationCondition](#ParticipationCondition)
+    - [AttemptResult](#AttemptResult)
+    - [Percent](#Percent)
+    - [Ranking](#Ranking)
+    - [Registrations](#Registrations)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
 - [ScrambleSet](#ScrambleSet)
@@ -439,7 +439,7 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | [`AttemptResult`](#participationcondition-attemptresult)\|[`Percent`](#participationcondition-percent)\|[`Ranking`](#participationcondition-ranking)\|[`Registrations`](#participationcondition-registrations) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `source` | [`AttemptResult`](#AttemptResult (ParticipationCondition))\|[`Percent`](#participationcondition-percent)\|[`Ranking`](#participationcondition-ranking)\|[`Registrations`](#participationcondition-registrations) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 #### Example - Normal (Non-Dual) Rounds
@@ -492,7 +492,7 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 ```
 
 
-### ParticipationCondition-AttemptResult
+#### AttemptResult (ParticipationCondition)
 
 | Attribute | Type | Description |
 | --- | --- | --- |
@@ -502,15 +502,7 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 ### ParticipationCondition-Ranking
 ### ParticipationCondition-Registrations
 
-### Ranking
-
-An `Integer` number of competitors.
-
-### Percent
-
-An `Integer` (between 0 and 100, inclusive) representing a percent of competitors (rounded down to the nearest integer).
-
-### AttemptResult
+#### Result
 
 An `Integer` representing a competitor result in a single attempt.
 
@@ -537,6 +529,15 @@ An attempt result `0DDTTTTTMM` encodes the following information:
 
 *Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
 As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
+
+#### Percent
+
+An `Integer` (between 0 and 100, inclusive) representing a percent of competitors (rounded down to the nearest integer).
+
+#### Ranking
+
+An `Integer` number of competitors.
+
 
 ### Qualification
 
@@ -578,6 +579,10 @@ See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcube
   "level": null
 }
 ```
+
+### ReservedPlaces
+
+
 
 ### Result
 
