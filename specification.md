@@ -33,6 +33,7 @@ The specification defines the following types:
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
+- [Condition](#Condition)
 - [CurrencyCode](#CurrencyCode)
 - [Cutoff](#Cutoff)
 - [Date](#Date)
@@ -170,6 +171,93 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 
 ```json
 "US"
+```
+
+### Condition - Option 1
+
+An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. #TODO: Links!
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Either type `ranking` (Top N competitors) `resultAchieved` (a single/average ResultValue achieved by the competitor), or `percent` (top n% of competitors). |
+| `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` `type`s. |
+| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the Condition. |
+
+### Condition - Option 2
+
+An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. #TODO: Links!
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Either type \n-`ranking` (Top N competitors) \n-`resultAchieved` (a single/average ResultValue achieved by the competitor), or \n-`percent` (top n% of competitors). |
+| `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` `type`s. |
+| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the Condition. |
+
+### Condition - Option 3
+
+An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. There are three `type`s of Condition, whose fields and behaviour are documented individually below.
+
+#TODO: Links!
+
+#### ResultAchieved
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `resultAchieved`
+| `scope` | `"single"\|"average"\|"`\|`null` | Specifies if the result should be a `single` or `average`. 
+| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the Condition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the Condition.
+
+##### Example
+```json
+// Any `single` meets the Condition
+{
+    "type": "resultAchieved",
+    "scope": "single",
+    "value": null
+}
+```
+
+```json
+// An average under 10 seconds meets the Condition
+{
+    "type": "resultAchieved",
+    "scope": "average",
+    "value": 1000
+}
+```
+
+
+#### Ranking
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `ranking`
+| `value` | |`Integer` | Top-N (inclusive) competitors who meet the Condition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationCondition)
+
+##### Example
+```json
+// Top 16 competitors meet the Condition
+{
+    "type": "percent",
+    "value": 16
+}
+```
+
+#### Percent
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `percent`
+| `value` | `Integer` | The top n-% of competitors who meet the Condition (70% will be expressed as `70`)
+
+##### Example
+
+```json
+// Top 70% of competitors meet the Condition
+{
+    "type": "percent",
+    "value": 70
+}
 ```
 
 ### CurrencyCode
