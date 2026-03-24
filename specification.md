@@ -498,7 +498,7 @@ A type of [ParticipationCondition](#ParticipationCondition), whereby the top n% 
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `String` | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `type` | `String` | Value will always be `percent`, identifying the type of ParticipationCondition to be used. 
 | `percent` | `Integer` | Value between 0 and 100 (inclusive), representing a percent of competitors from the previous round (rounded down to the nearest integer).
 
 ### Ranking (ParticipationCondition)
