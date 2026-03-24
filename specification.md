@@ -439,7 +439,7 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | [`AttemptResult`](#attemptresult-participationcondition)\|[`Percent`](#participationcondition-percent)\|[`Ranking`](#participationcondition-ranking)\|[`Registrations`](#participationcondition-registrations) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `source` | [`AttemptResult`](#attemptresult-participationcondition)\|[`Percent`](#percent-participationcondition)\|[`Ranking`](#ranking-participationcondition)\|[`Registrations`](#registrations-participationcondition) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 #### Example - Normal (Non-Dual) Rounds
@@ -491,16 +491,19 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 }
 ```
 
+### Percent (ParticipationCondition)
 
-#### AttemptResult (ParticipationCondition)
+A type of [ParticipationCondition](#ParticipationCondition), whereby the top n% of competitors from the preceeding round will be selected to participate in this one.
+
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | `"registrations"\|"ranking"\|"percent"\|"attemptResult"` | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `type` | `String` | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `percent` | `Integer` | Value between 0 and 100 (inclusive), representing a percent of competitors from the previous round (rounded down to the nearest integer).
 
-### ParticipationCondition-Percent
-### ParticipationCondition-Ranking
-### ParticipationCondition-Registrations
+### Ranking (ParticipationCondition)
+### Registrations (ParticipationCondition)
+### ResultAchieved (ParticipationCondition)
 
 #### Result
 
