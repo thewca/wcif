@@ -55,6 +55,7 @@ The specification defines the following types:
     - [Percent](#Percent)
     - [Ranking](#Ranking)
     - [Registrations](#Registrations)
+- [ReservedPlaces](#ReservedPlaces)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
 - [ScrambleSet](#ScrambleSet)
@@ -458,7 +459,7 @@ Represents data of a round held at the competition.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `id` | `String` | The round identifier of the form `{eventId}-r{roundNumber}`. *Note: this is a valid [`ActivityCode`](#activitycode).* |
-| `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
+| `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
 | `participationCondition` | [`ParticipationCondition`](#participationcondition) | Specifies how the round should determine which comeptitors participate in it. |
