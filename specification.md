@@ -439,7 +439,7 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | [`AttemptResult`](#AttemptResult (ParticipationCondition))\|[`Percent`](#participationcondition-percent)\|[`Ranking`](#participationcondition-ranking)\|[`Registrations`](#participationcondition-registrations) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `source` | [`AttemptResult`](#attemptresult-participationcondition)\|[`Percent`](#participationcondition-percent)\|[`Ranking`](#participationcondition-ranking)\|[`Registrations`](#participationcondition-registrations) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 #### Example - Normal (Non-Dual) Rounds
