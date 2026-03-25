@@ -530,7 +530,7 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `"registrations"\|"round"\|"linkedRounds"` | Specifies where the `source` draws its data from - either the registrations list, the immediately preceeding round (`round`), or the union of all preceeding `linkedRounds`. |
-| `roundId` | [`String`] | Only present for `type: "round"`. Indicates the round from which competitors should be considered. | 
+| `roundId` | `String` | Only present for `type: "round"`. Indicates the round from which competitors should be considered. | 
 | `roundIds` | [`String`] | Only present for `type: "linkedRounds"`. The best result for each competitor from across all listed rounds will be used for determining participation. | 
 
 ##### Example
@@ -609,7 +609,7 @@ Places in a finals reserved for competitors from the nationality or continent ho
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `nationalities` | `[Strings]` | List of all ISO-3166-1 country codes for whom reservations are in effect. |
+| `nationalities` | `[[CountryCode](#countrycode)]` | List of all ISO-3166-1 country codes for whom reservations are in effect. |
 | `count` | `Integer` | The number of places reserved for competitors from the `nationalities` list. Note that the reserved places are shared across all listed nationalities - the Top N competitors from _all_ listed countries will fill the reserved places.  |
 
 #### Example
@@ -623,7 +623,7 @@ Places in a finals reserved for competitors from the nationality or continent ho
 ```
 
 ```json
-// South American continental championship - all European countries are listed for reservations
+// South American continental championship - all South American countries are listed for reservations
 {
   "nationalities": ["AR", "BO", "BR", "CL", "CO", "EC", "GY", "PY", "PE", "SR", "UY", "VE", "XS"],
   "reservations": 8
