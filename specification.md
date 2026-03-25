@@ -609,7 +609,7 @@ Places in a finals reserved for competitors from the nationality or continent ho
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `nationalities` | `[[CountryCode](#countrycode)]` | List of all ISO-3166-1 country codes for whom reservations are in effect. |
+| `nationalities` | [`[CountryCode](#countrycode)`] | List of all ISO-3166-1 country codes for whom reservations are in effect. |
 | `count` | `Integer` | The number of places reserved for competitors from the `nationalities` list. Note that the reserved places are shared across all listed nationalities - the Top N competitors from _all_ listed countries will fill the reserved places.  |
 
 #### Example
