@@ -528,57 +528,6 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 | `condition` | [`Condition`](#condition)\|`null` | The requirement a competitor must satisfy to be included in the round. `null` indicates that all competitors from the `source` take part in the round. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
-#### Example - Normal (Non-Dual) Rounds
-
-```json
-{
-  "competitions.events.rounds.333-r1.participationCondition": {
-    "source": {
-      "type": "registrations"
-    }
-    "reservedPlaces": {...}
-  }
-}
-
-{
-  "competitions.events.rounds.333-r2.participationCondition": {
-    "source": {
-      "type": "percent",
-      "roundIds": ["333-r1"],
-      "percent": 75
-    }
-    "reservedPlaces": {...}
-  }
-}
-
-```
-
-#### Example - Dual Rounds
-
-```json
-// Rounds 1 and 2 use the same `source`, as they both draw from Registrations
-{ "competitions.events.rounds.333-r1||2.participationCondition": {
-    "source": { 
-      "type": "registrations"
-    },
-    "reservedPlaces": {...}
-  }
-}
-```
-
-```json
-// Round 3 draws from the best result for each competitor of all rounds contained in its `roundIds` field
-{ 
-  "competitions.events.rounds.333-r3.participationCondition": {
-    "source": {
-      "type": "ranking"
-      "roundIds": ["333-r1", "333-r2"]
-      "ranking": 16
-    },
-    "reservedPlaces": {...}
-}
-```
-
 #### ParticipationCondition.Source
 
 | Attribute | Type | Description |
