@@ -29,7 +29,7 @@ The specification defines the following types:
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
-- [Condition](#Condition)
+- [ResultCondition](#ResultCondition)
 - [CurrencyCode](#CurrencyCode)
 - [Cutoff](#Cutoff)
 - [Date](#Date)
@@ -166,29 +166,29 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 "US"
 ```
 
-### Condition - Option 1
+### ResultCondition - Option 1
 
 An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. #TODO: Links!
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Either type `ranking` (Top N competitors) `resultAchieved` (a single/average ResultValue achieved by the competitor), or `percent` (top n% of competitors). |
+| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of ResultCondition. Either type `ranking` (Top N competitors) `resultAchieved` (a single/average ResultValue achieved by the competitor), or `percent` (top n% of competitors). |
 | `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` `type`s. |
-| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the Condition. |
+| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the ResultCondition. |
 
-### Condition - Option 2
+### ResultCondition - Option 2
 
 An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. #TODO: Links!
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of Condition. Options are: <br>-`ranking` (Top N competitors) <br>-`resultAchieved` (a single/average ResultValue achieved by the competitor), or <br>-`percent` (top n% of competitors). |
+| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of ResultCondition. Options are: <br>-`ranking` (Top N competitors) <br>-`resultAchieved` (a single/average ResultValue achieved by the competitor), or <br>-`percent` (top n% of competitors). |
 | `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` types. |
-| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the Condition. |
+| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the ResultCondition. |
 
-### Condition - Option 3
+### ResultCondition - Option 3
 
-An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. There are three `type`s of Condition, whose fields and behaviour are documented individually below.
+An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. There are three `type`s of ResultCondition, whose fields and behaviour are documented individually below.
 
 #TODO: Links!
 
@@ -198,11 +198,11 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 | --- | --- | --- |
 | `type` | `String` | Always `resultAchieved`
 | `scope` | `"single"\|"average"\|"`\|`null` | Specifies if the result should be a `single` or `average`. 
-| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the Condition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the Condition.
+| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the Condition.
 
 ##### Example
 ```json
-// Any `single` meets the Condition
+// Any `single` meets the ResultCondition
 {
     "type": "resultAchieved",
     "scope": "single",
@@ -211,7 +211,7 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 ```
 
 ```json
-// An average under 10 seconds meets the Condition
+// An average under 10 seconds meets the ResultCondition
 {
     "type": "resultAchieved",
     "scope": "average",
@@ -225,11 +225,11 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `ranking`
-| `value` | |`Integer` | Top-N (inclusive) competitors who meet the Condition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationCondition)
+| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationCondition)
 
 ##### Example
 ```json
-// Top 16 competitors meet the Condition
+// Top 16 competitors meet the ResultCondition
 {
     "type": "percent",
     "value": 16
@@ -241,12 +241,12 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `percent`
-| `value` | `Integer` | The top n-% of competitors who meet the Condition (70% will be expressed as `70`)
+| `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`)
 
 ##### Example
 
 ```json
-// Top 70% of competitors meet the Condition
+// Top 70% of competitors meet the ResultCondition
 {
     "type": "percent",
     "value": 70
@@ -522,7 +522,7 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `source` | [`Source`](#participationconditionsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
-| `condition` | [`Condition`](#condition)\|`null` | The requirement a competitor must satisfy to be included in the round. `null` indicates that all competitors from the `source` take part in the round. |
+| `resultCondition` | [`ResultCondition`](#resultcondition)\|`null` | The requirement a competitor must satisfy to be included in the round. `null` indicates that all competitors from the `source` take part in the round. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 #### ParticipationCondition.Source
@@ -544,14 +544,14 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 ```json
 // Normal (non-dual) round is the source
 {
-  "type": "rounds",
+  "type": "round",
   "roundId": "333-r1"
 }
 
 ```json
 // Dual round is the source
 {
-  "type": "rounds",
+  "type": "linkedRounds",
   "roundIds": ["333-r1", "333-r2"]
 }
 ```
@@ -592,14 +592,14 @@ See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements P
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `whenDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
-| `condition` | [`Condition`](#condition) | Specifies the requirement a competitor must satisfy to register. Only Condition types `resultValue` and `ranking` are used for Qualification. |
+| `resultCondition` | [`ResultCondition`](#resultcondition) | Specifies the requirement a competitor must satisfy to register. Only ResultCondition types `resultValue` and `ranking` are used for Qualification. |
 
 #### Examples
 
 ```json
 {
   "whenDate": "2020-04-25",
-  "condition": {...}
+  "resultCondition": {...}
 }
 ```
 
