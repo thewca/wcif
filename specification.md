@@ -529,8 +529,9 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"registrations"\|"rounds"` | Specifies where the `source` draws its data from - either the registrations list, or at least 1 preceeding round. |
-| `roundIds` | [`String`] | Only present for `type: rounds`. An array of `round.id` values from which the pariticpationCriteria draws - can contain a single entry if only one round is the source, or multiple entries if a Dual Round is the source. In the case of multiple roundId's, the best result for each competitor from across all rounds in the list will be used for determining participation. |
+| `type` | `"registrations"\|"round"\|"linkedRounds"` | Specifies where the `source` draws its data from - either the registrations list, the immediately preceeding round (`round`), or the union of all preceeding `linkedRounds`. |
+| `roundId` | [`String`] | Only present for `type: "round"`. Indicates the round from which competitors should be considered. | 
+| `roundIds` | [`String`] | Only present for `type: "linkedRounds"`. The best result for each competitor from across all listed rounds will be used for determining participation. | 
 
 ##### Example
 
@@ -544,7 +545,7 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 // Normal (non-dual) round is the source
 {
   "type": "rounds",
-  "roundIds": ["333-r1"]
+  "roundId": "333-r1"
 }
 
 ```json
