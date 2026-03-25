@@ -564,7 +564,9 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
     "reservedPlaces": {...}
   }
 }
+```
 
+```json
 // Round 3 draws from the best result for each competitor of all rounds contained in its `roundIds` field
 { 
   "competitions.events.rounds.333-r3.participationCondition": {
