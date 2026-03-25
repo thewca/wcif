@@ -4,10 +4,10 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 2.0.0
-- Status: Latest
-- Next Status: Stable
-- Status Advancement Date: 2026-04-09
+- Number: 1.1
+- Status: Stable
+- Next Status: Deprecated
+- Status Advancement Date: N/A
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
@@ -458,7 +458,7 @@ Represents data of a round held at the competition.
 | `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
-| `participationCondition` | [`ParticipationCondition`](#participationcondition) | Specifies how the round should determine which comeptitors participate in it. |
+| `advancementCondition` | [`AdvancementCondition`](#advancementcondition)\|`null` | The condition specifying which competitors advance to the next round. |
 | `results` | [`[Result]`](#result) | List of all round results. |
 | `scrambleSetCount` | `Integer` | The number of scramble sets needed for this round. |
 | `scrambleSets` | [`[ScrambleSet]`](#scrambleset) | List of scramble sets used in this round. |
@@ -472,7 +472,7 @@ Represents data of a round held at the competition.
   "format": "a",
   "timeLimit": {...},
   "cutoff": {...},
-  "participationCondition": {...},
+  "advancementCondition": {...},
   "results": [...],
   "scrambleSetCount": 4,
   "scrambleSets": [...],
@@ -520,7 +520,7 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 
 Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) to include should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
-Regardless of the participation condition type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
+Regardless of the advancement condition type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
@@ -585,7 +585,6 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 | --- | --- | --- |
 | `type` | `"registrations"\|"rounds"` | Specifies where the `source` draws its data from - either the registrations list, or at least 1 preceeding round. |
 | `roundIds` | [`String`] | Only present for `type: rounds`. An array of `round.id` values from which the pariticpationCriteria draws - can contain a single entry if only one round is the source, or multiple entries if a Dual Round is the source. In the case of multiple roundId's, the best result for each competitor from across all rounds in the list will be used for determining participation. |
-
 
 ##### Example
 
