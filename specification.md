@@ -4,10 +4,10 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 1.1
-- Status: Stable
-- Next Status: Deprecated
-- Status Advancement Date: N/A
+- Number: 2.0.0
+- Status: Latest
+- Next Status: Stable
+- Status Advancement Date: 2026-04-08
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
@@ -20,6 +20,16 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 ## Changelog from v1.1
 
 Changes from v1.1 are as follows:
+
+### Major
+- Replaced `AdvancementCondition` object with `ParticipationCondition`
+- `Condition` object added, which is used by both `ParticipationCondition` and `Qualification`
+- `Qualification` object changed to make use of `Condition`
+- `ParticipationCondition` includes `ReservedPlaces`, which implements [Regulation 9p2b](https://www.worldcubeassociation.org/regulations/#9p2b)
+
+### Minor
+- Added value `h` to `round.format` enum - `h` corresponds to the Head-to-Head format described in the [2026 Regulations](https://www.worldcubeassociation.org/regulations/#article-I-headtohead).
+- Added `linkedRounds` field to `Round` object, which indicates a round's participation in a [Dual Round](https://www.worldcubeassociation.org/regulations/#9v).
 
 ## Objects
 
@@ -455,6 +465,7 @@ Represents data of a round held at the competition.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `id` | `String` | The round identifier of the form `{eventId}-r{roundNumber}`. *Note: this is a valid [`ActivityCode`](#activitycode).* |
+| `linkedRounds` | [`String`] | A list of round ID's indicating the rounds which this round is linked to, for the purposes of implementing [Dual Rounds](https://www.worldcubeassociation.org/regulations/#9v). LinkedRounds have their results considered together for the purpose of participation in subsequent rounds in the competition. |
 | `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
