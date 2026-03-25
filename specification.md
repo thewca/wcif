@@ -51,10 +51,6 @@ The specification defines the following types:
 - [Round](#Round)
 - [Series](#Series)
 - [ParticipationCondition](#ParticipationCondition)
-    - [AttemptResult](#AttemptResult)
-    - [Percent](#Percent)
-    - [Ranking](#Ranking)
-    - [Registrations](#Registrations)
 - [ReservedPlaces](#ReservedPlaces)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
@@ -528,7 +524,8 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | [`AttemptResult`](#attemptresult-participationcondition)\|[`Percent`](#percent-participationcondition)\|[`Ranking`](#ranking-participationcondition)\|[`Registrations`](#registrations-participationcondition) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `source` | [`Source`](#participationconditionsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `condition` | [`Condition`](#condition)\|`null` | The requirement a competitor must satisfy to be included in the round. `null` indicates that all competitors from the `source` take part in the round. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 #### Example - Normal (Non-Dual) Rounds
@@ -580,21 +577,38 @@ Regardless of the participation condition type, [regulation 9p1](https://www.wor
 }
 ```
 
-### Percent (ParticipationCondition)
-
-A type of [ParticipationCondition](#ParticipationCondition), whereby the top n% of competitors from the preceeding round will be selected to participate in this one.
-
+#### ParticipationCondition.Source
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `String` | Value will always be `percent`, identifying the type of ParticipationCondition to be used. 
-| `percent` | `Integer` | Value between 0 and 100 (inclusive), representing a percent of competitors from the previous round (rounded down to the nearest integer).
+| `type` | `"registrations"\|"rounds"` | Specifies where the `source` draws its data from - either the registrations list, or at least 1 preceeding round. |
+| `roundIds` | [`String`] | Only present for `type: rounds`. An array of `round.id` values from which the pariticpationCriteria draws - can contain a single entry if only one round is the source, or multiple entries if a Dual Round is the source. In the case of multiple roundId's, the best result for each competitor from across all rounds in the list will be used for determining participation. |
 
-### Ranking (ParticipationCondition)
-### Registrations (ParticipationCondition)
-### ResultAchieved (ParticipationCondition)
 
-#### Result
+##### Example
+
+```json
+{
+  "type": "registrations",
+}
+```
+
+```json
+// Normal (non-dual) round is the source
+{
+  "type": "rounds",
+  "roundIds": ["333-r1"]
+}
+
+```json
+// Dual round is the source
+{
+  "type": "rounds",
+  "roundIds": ["333-r1", "333-r2"]
+}
+```
+
+### Result
 
 An `Integer` representing a competitor result in a single attempt.
 
@@ -622,53 +636,22 @@ An attempt result `0DDTTTTTMM` encodes the following information:
 *Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
 As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
 
-#### Percent
-
-An `Integer` (between 0 and 100, inclusive) representing a percent of competitors (rounded down to the nearest integer).
-
-#### Ranking
-
-An `Integer` number of competitors.
-
-
 ### Qualification
 
 Represents a requirement that a person must satisfy to qualify to register for the given event.
-See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcubeassociation.org/documents/policies/external/Competition%20Requirements.pdf) for more details.
+See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements Policy](https://documents.worldcubeassociation.org/documents/policies/external/Competition%20Requirements.pdf) for more details.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `whenDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
-| `type` | `"attemptResult"\|"ranking"\|"anyResult"` | The type of qualification. Either of ranking (top N competitors), attempt result (competitors with result better than Y - either single or average) or any result (competitors with any successful result of the given type). |
-| `resultType` | `"single"\|"average"` | The type of result the requirement refers to. |
-| `level` | [`AttemptResult`](#attemptresult)\|[`Ranking`](#ranking)\|`null` | The parameter of the qualification condition of the given type. Not used with `anyResult`. |
+| `condition` | [`Condition`](#condition) | Specifies the requirement a competitor must satisfy to register. Only Condition types `resultValue` and `ranking` are used for Qualification. |
 
 #### Examples
 
 ```json
 {
   "whenDate": "2020-04-25",
-  "type": "attemptResult",
-  "resultType": "single",
-  "level": 6000
-}
-```
-
-```json
-{
-  "whenDate": "2020-04-25",
-  "type": "ranking",
-  "resultType": "average",
-  "level": 50
-}
-```
-
-```json
-{
-  "whenDate": "2020-04-25",
-  "type": "anyResult",
-  "resultType": "single",
-  "level": null
+  "condition": {...}
 }
 ```
 
