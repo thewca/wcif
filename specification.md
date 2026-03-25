@@ -614,7 +614,7 @@ Places in a finals reserved for competitors from the nationality or continent ho
 #### Example
 
 ```json
-// Argentina national championship - reservations are only in effect for the hosting country of Germany
+// Argentina national championship - reservations are only in effect for the hosting country 
 {
   "nationalities": ["AR"],
   "reservations": 8
