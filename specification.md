@@ -17,20 +17,6 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 - [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
 - Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
-## Changelog from v1.1
-
-Changes from v1.1 are as follows:
-
-### Major
-- Replaced `AdvancementCondition` object with `ParticipationCondition`
-- `Condition` object added, which is used by both `ParticipationCondition` and `Qualification`
-- `Qualification` object changed to make use of `Condition`
-- `ParticipationCondition` includes `ReservedPlaces`, which implements [Regulation 9p2b](https://www.worldcubeassociation.org/regulations/#9p2b)
-
-### Minor
-- Added value `h` to `round.format` enum - `h` corresponds to the Head-to-Head format described in the [2026 Regulations](https://www.worldcubeassociation.org/regulations/#article-I-headtohead).
-- Added `linkedRounds` field to `Round` object, which indicates a round's participation in a [Dual Round](https://www.worldcubeassociation.org/regulations/#9v).
-
 ## Objects
 
 The specification defines the following types:
