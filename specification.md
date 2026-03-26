@@ -46,7 +46,7 @@ The specification defines the following types:
 - [Room](#Room)
 - [Round](#Round)
 - [Series](#Series)
-- [ParticipationCondition](#ParticipationCondition)
+- [ParticipationData](#ParticipationCondition)
 - [ReservedPlaces](#ReservedPlaces)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
@@ -166,29 +166,9 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 "US"
 ```
 
-### ResultCondition - Option 1
+### ResultCondition
 
-An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. #TODO: Links!
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of ResultCondition. Either type `ranking` (Top N competitors) `resultAchieved` (a single/average ResultValue achieved by the competitor), or `percent` (top n% of competitors). |
-| `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` `type`s. |
-| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the ResultCondition. |
-
-### ResultCondition - Option 2
-
-An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. #TODO: Links!
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `type` | `"resultAchieved"\|"ranking"\|"percent"` | The type of ResultCondition. Options are: <br>-`ranking` (Top N competitors) <br>-`resultAchieved` (a single/average ResultValue achieved by the competitor), or <br>-`percent` (top n% of competitors). |
-| `scope` | `"single"\|"average"\|"`\|`null` | Only used for `resultAchieved` - specifies if the result should be a `single` or `average`. Null for non-`resultAchieved` types. |
-| `value` | `ResultValue`\|`Integer`\|`null` | The parameter of the qualification condition of the given type. Can only be `null` for `resultAchieved`, where it indicates that any valid single/average satisfies the ResultCondition. |
-
-### ResultCondition - Option 3
-
-An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationCondition. It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
+An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationData. It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
 
 #TODO: Links!
 
@@ -225,7 +205,7 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `ranking`
-| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationCondition)
+| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationData)
 
 ##### Example
 ```json
@@ -513,7 +493,7 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 }
 ```
 
-### ParticipationCondition
+### ParticipationData
 
 Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) to include should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
@@ -525,13 +505,17 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 | `resultCondition` | [`ResultCondition`](#resultcondition)\|`null` | The requirement a competitor must satisfy to be included in the round. `null` indicates that all competitors from the `source` take part in the round. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
-#### ParticipationCondition.Source
+### ParticipationData.Source
+
+An object indicating where a round should draw its participating competitors from. One of `registrations`, `round` or `linkedRounds`, differentiated by the `type` field.
+
+#### Registrations 
+
+Indicates that all registered competitors should take part in the round.  
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"registrations"\|"round"\|"linkedRounds"` | Specifies where the `source` draws its data from - either the registrations list, the immediately preceeding round (`round`), or the union of all preceeding `linkedRounds`. |
-| `roundId` | `String` | Only present for `type: "round"`. Indicates the round from which competitors should be considered. | 
-| `roundIds` | [`String`] | Only present for `type: "linkedRounds"`. The best result for each competitor from across all listed rounds will be used for determining participation. | 
+| `type` | `String` | Always `registrations` |
 
 ##### Example
 
@@ -541,18 +525,45 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 }
 ```
 
-```json
-// Normal (non-dual) round is the source
-{
-  "type": "round",
-  "roundId": "333-r1"
-}
+#### Round
+
+Apply the `resultCondition` to competitor results from the given `roundId` to determine who participates in the round.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `round` |
+| `roundId` | `String` | Indicates the round from which competitors should be considered. | 
+| `resultCondition` | [`ResultCondition`](#resultcondition) | The requirement a competitor must satisfy to be included in the round. |
+
+##### Example
 
 ```json
-// Dual round is the source
+{
+  "type": "round",
+  "roundId": "333-r1",
+  "resultCondition": {...}
+}
+```
+
+#### LinkedRounds
+
+Each competitor's should be ranked according to their best result from across all `roundIds`, and then a `resultCondition` should be applied to determine who participates in the round. 
+
+In practical terms, this is an implementation of [Dual Rounds](https://www.worldcubeassociation.org/regulations/#9v), designed to leave open the possibility that more than just two rounds might have their results combined in future.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `linkedRounds` |
+| `roundIds` | [`String`] | Only present for `type: "linkedRounds"`. The best result for each competitor from across all listed rounds will be used for determining participation. | 
+| `resultCondition` | [`ResultCondition`](#resultcondition) | The requirement a competitor must satisfy to be included in the round. |
+
+##### Example
+
+```json
 {
   "type": "linkedRounds",
-  "roundIds": ["333-r1", "333-r2"]
+  "roundIds": ["333-r1", "333-r2"],
+  "resultCondition": {...}
 }
 ```
 
@@ -584,12 +595,11 @@ An attempt result `0DDTTTTTMM` encodes the following information:
 *Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
 As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
 
-### AttemptResult
+### ResultValue
 
 An `Integer` representing a competitor result in a single attempt.
 
 The following values are defined to have special meaning:
-- `0` represents a skipped attempt (e.g. an attempt may be skipped if a competitor does not meet the cutoff)
 - `-1` represents a DNF (Did Not Finish)
 - `-2` represents a DNS (Did Not Start)
 
