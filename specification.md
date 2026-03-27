@@ -621,41 +621,12 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 }
 ```
 
-### ResultValue
-
-An `Integer` representing a result (either single or average) achieved by a competitor.
-
-The following values are defined to have special meaning:
-- `-1` represents a DNF (Did Not Finish)
-- `-2` represents a DNS (Did Not Start)
-
-In the default case the value represents the number of centiseconds measured
-(e.g. `1:10.25` would be represented as `7025`).
-
-For 3x3x3 Fewest Moves the value represents the number of moves,
-but averages are represented as 100 times the average
-(i.e. an single result of `25` moves is represented as `25`, while an average result of `25.33` moves is represented as `2533`).
-
-For 3x3x3 Multi-Blind the value encodes the time as well as the number of cubes attempted and solved
-(designed so that a lower value means a better result).\
-An attempt result `0DDTTTTTMM` encodes the following information:
-- `timeInSeconds = TTTTT (99999 means unknown)`
-- `difference    = 99 - DD`
-- `missed        = MM`
-- `solved        = difference + missed`
-- `attempted     = solved + missed`
-
-*Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
-As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
-
-
-
 #### Ranking
 
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `ranking`
-| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
+| `value` |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
 
 ##### Example
 ```json
@@ -683,6 +654,32 @@ As the other format is very old and doesn't need to be supported by new applicat
 }
 ```
 
+### ResultValue
+
+An `Integer` representing a result (either single or average) achieved by a competitor.
+
+The following values are defined to have special meaning:
+- `-1` represents a DNF (Did Not Finish)
+- `-2` represents a DNS (Did Not Start)
+
+In the default case the value represents the number of centiseconds measured
+(e.g. `1:10.25` would be represented as `7025`).
+
+For 3x3x3 Fewest Moves the value represents the number of moves,
+but averages are represented as 100 times the average
+(i.e. an single result of `25` moves is represented as `25`, while an average result of `25.33` moves is represented as `2533`).
+
+For 3x3x3 Multi-Blind the value encodes the time as well as the number of cubes attempted and solved
+(designed so that a lower value means a better result).\
+An attempt result `0DDTTTTTMM` encodes the following information:
+- `timeInSeconds = TTTTT (99999 means unknown)`
+- `difference    = 99 - DD`
+- `missed        = MM`
+- `solved        = difference + missed`
+- `attempted     = solved + missed`
+
+*Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
+As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
 
 ### ScrambleSet
 
