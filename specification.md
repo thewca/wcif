@@ -7,7 +7,7 @@ It's designed as a way for many applications to exchange data in a standardized 
 - Number: 2.0.0
 - Status: Latest
 - Next Status: Stable
-- Status Advancement Date: 2026-04-08
+- Status Advancement Date: 2026-04-27
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
