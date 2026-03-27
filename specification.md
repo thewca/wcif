@@ -176,7 +176,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `resultAchieved`
-| `scope` | `"single"\|"average"\|"`\|`null` | Specifies if the result should be a `single` or `average`. 
+| `scope` | `"single"\|"average"\|"` | Specifies if the result should be a `single` or `average`. 
 | `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition.
 
 ##### Example
@@ -626,7 +626,8 @@ See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements P
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `whenDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
+| `earliestResultDate` | [`Date`](#date)\|`null` | An optional field indicating a date from which a result must have been achieved in order to meet the qualification. In practice, this would be to ensure that qualification spots are taken by active, in-form competitors. |
+| `latestResultDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
 | `resultCondition` | [`ResultCondition`](#resultcondition) | Specifies the requirement a competitor must satisfy to register. Only ResultCondition types `resultValue` and `ranking` are used for Qualification. |
 
 #### Examples
