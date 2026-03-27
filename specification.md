@@ -381,7 +381,7 @@ Represents an official personal record.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `eventId` | `String` | Identifier of the WCA event. |
-| `best` | [`AttemptResult`](#attemptresult) | The actual record value. |
+| `best` | [`ResultValue`](#resultvalue) | The actual record value. |
 | `type` | `"single"\|"average"` | The type of the record. |
 | `worldRanking` | `Integer` | The position in the official world ranking. |
 | `continentalRanking` | `Integer` | The position in the official continental ranking. |
@@ -481,15 +481,15 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `numberOfAttempts` | `Integer` | The number of attempts the competitors has to get an attempt better than `attemptResult`. |
-| `attemptResult` | [`AttemptResult`](#attemptresult) | The attempt result that needs to be beaten in order to be eligible for the remaining attempts. |
+| `numberOfAttempts` | `Integer` | The number of attempts the competitors has to get an attempt better than `resultValue`. |
+| `resultValue` | [`ResultValue`](#resultvalue) | The attempt result that needs to be beaten in order to be eligible for the remaining attempts. |
 
 #### Example
 
 ```json
 {
   "numberOfAttempts": 2,
-  "attemptResult": 3000,
+  "resultValue": 3000,
 }
 ```
 
@@ -501,7 +501,7 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | [`Source`](#participationconditionsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `source` | [`Source`](#participationrulesetsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 ### ParticipationRuleset.Source
@@ -648,8 +648,8 @@ Represents a competitor result in a single round.
 | `personId` | `Integer` | The corresponding person `registrantId`. |
 | `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
 | `attempts` | [`[Attempt]`](#attempt) | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
-| `best` | [`AttemptResult`](#attemptresult) | The best attempt result of `attempts`. |
-| `average` | [`AttemptResult`](#attemptresult) | The average attempt result of `attempts` (depending on the format, either average of 5 or mean of 3). |
+| `best` | [`ResultValue`](#resultvalue) | The best attempt result of `attempts`. |
+| `average` | [`ResultValue`](#resultvalue) | The average attempt result of `attempts` (depending on the format, either average of 5 or mean of 3). |
 
 #### Example
 
@@ -669,7 +669,7 @@ Represents one of attempts a competitor got during the given round.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `result` | [`AttemptResult`](#attemptresult) | The achieved attempt result. |
+| `result` | [`ResultValue`](#resultvalue) | The achieved attempt result. |
 | `reconstruction` | `String\|null` | An optional reconstruction of the attempt. |
 
 #### Example
