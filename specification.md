@@ -29,7 +29,6 @@ The specification defines the following types:
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
-- [ResultCondition](#ResultCondition)
 - [CurrencyCode](#CurrencyCode)
 - [Cutoff](#Cutoff)
 - [Date](#Date)
@@ -42,6 +41,7 @@ The specification defines the following types:
 - [Registration](#Registration)
 - [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
+- [ResultCondition](#ResultCondition)
 - [Role](#Role)
 - [Room](#Room)
 - [Round](#Round)
@@ -167,70 +167,6 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 "US"
 ```
 
-### ResultCondition
-
-An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](#participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
-
-#### ResultAchieved
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `type` | `String` | Always `resultAchieved`
-| `scope` | `"single"\|"average"` | Specifies if the result should be a `single` or `average`. 
-| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition.
-
-##### Example
-```json
-// Any `single` meets the ResultCondition
-{
-    "type": "resultAchieved",
-    "scope": "single",
-    "value": null
-}
-```
-
-```json
-// An average under 10 seconds meets the ResultCondition
-{
-    "type": "resultAchieved",
-    "scope": "average",
-    "value": 1000
-}
-```
-
-
-#### Ranking
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `type` | `String` | Always `ranking`
-| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
-
-##### Example
-```json
-// Top 16 competitors meet the ResultCondition
-{
-    "type": "percent",
-    "value": 16
-}
-```
-
-#### Percent
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `type` | `String` | Always `percent`
-| `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`)
-
-##### Example
-
-```json
-// Top 70% of competitors meet the ResultCondition
-{
-    "type": "percent",
-    "value": 70
-}
-```
 
 ### CurrencyCode
 
@@ -681,6 +617,72 @@ Represents one of attempts a competitor got during the given round.
   "reconstruction": "z y2 U Rw' D2 L F' L' D' ..."
 }
 ```
+
+### ResultCondition
+
+An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](#participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
+
+#### ResultAchieved
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `resultAchieved`
+| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. 
+| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition.
+
+##### Example
+```json
+// Any `single` meets the ResultCondition
+{
+    "type": "resultAchieved",
+    "scope": "single",
+    "value": null
+}
+```
+
+```json
+// An average under 10 seconds meets the ResultCondition
+{
+    "type": "resultAchieved",
+    "scope": "average",
+    "value": 1000
+}
+```
+
+
+#### Ranking
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `ranking`
+| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
+
+##### Example
+```json
+// Top 16 competitors meet the ResultCondition
+{
+    "type": "percent",
+    "value": 16
+}
+```
+
+#### Percent
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `percent`
+| `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`)
+
+##### Example
+
+```json
+// Top 70% of competitors meet the ResultCondition
+{
+    "type": "percent",
+    "value": 70
+}
+```
+
 
 ### ScrambleSet
 
