@@ -4,9 +4,9 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 1.1
-- Status: Stable
-- Next Status: Deprecated
+- Number: 2.0.0
+- Status: Latest
+- Next Status: Stable
 - Status Advancement Date: N/A
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
@@ -17,22 +17,15 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 - [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
 - Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
-## Changelog from v1.0
-
-Changes from v1.0 are as follows:
-- Added value `5` to `round.format` enum - `5` corresponds to a Best of 5 format as described in the [2026 Regulation Changes](https://github.com/thewca/wca-regulations-january-2026/pull/48).
-
 ## Objects
 
 The specification defines the following types:
 
 - [Activity](#Activity)
 - [ActivityCode](#ActivityCode)
-- [AdvancementCondition](#AdvancementCondition)
 - [Assignment](#Assignment)
 - [AssignmentCode](#AssignmentCode)
 - [Attempt](#Attempt)
-- [AttemptResult](#AttemptResult)
 - [Avatar](#Avatar)
 - [Competition](#Competition)
 - [CountryCode](#CountryCode)
@@ -42,18 +35,21 @@ The specification defines the following types:
 - [DateTime](#DateTime)
 - [Event](#Event)
 - [Extension](#Extension)
-- [Percent](#Percent)
 - [Person](#Person)
 - [PersonalBest](#PersonalBest)
 - [Qualification](#Qualification)
-- [Ranking](#Ranking)
 - [Registration](#Registration)
 - [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
+- [ResultCondition](#ResultCondition)
+- [ResultValue](#ResultValue)
 - [Role](#Role)
 - [Room](#Room)
 - [Round](#Round)
 - [Series](#Series)
+- [ParticipationRuleset](#ParticipationRuleset)
+- [ParticipationSource](#ParticipationSource)
+- [ReservedPlaces](#ReservedPlaces)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
 - [ScrambleSet](#ScrambleSet)
@@ -320,7 +316,7 @@ Represents an official personal record.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `eventId` | `String` | Identifier of the WCA event. |
-| `best` | [`AttemptResult`](#attemptresult) | The actual record value. |
+| `value` | [`ResultValue`](#resultvalue) | The actual record value. |
 | `type` | `"single"\|"average"` | The type of the record. |
 | `worldRanking` | `Integer` | The position in the official world ranking. |
 | `continentalRanking` | `Integer` | The position in the official continental ranking. |
@@ -370,10 +366,11 @@ Represents data of a round held at the competition.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `id` | `String` | The round identifier of the form `{eventId}-r{roundNumber}`. *Note: this is a valid [`ActivityCode`](#activitycode).* |
-| `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
+| `linkedRounds` | [`String`] | A list of round ID's indicating the rounds which this round is linked to, for the purposes of implementing [Dual Rounds](https://www.worldcubeassociation.org/regulations/#9v). LinkedRounds have their results considered together for the purpose of participation in subsequent rounds in the competition. |
+| `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
-| `advancementCondition` | [`AdvancementCondition`](#advancementcondition)\|`null` | The condition specifying which competitors advance to the next round. |
+| `participationRuleset` | [`ParticipationRuleset`](#participationruleset)\|`null` | The ruleset specifying are eligible to compete in the current round. |
 | `results` | [`[Result]`](#result) | List of all round results. |
 | `scrambleSetCount` | `Integer` | The number of scramble sets needed for this round. |
 | `scrambleSets` | [`[ScrambleSet]`](#scrambleset) | List of scramble sets used in this round. |
@@ -387,7 +384,7 @@ Represents data of a round held at the competition.
   "format": "a",
   "timeLimit": {...},
   "cutoff": {...},
-  "advancementCondition": {...},
+  "participationRuleset": {...},
   "results": [...],
   "scrambleSetCount": 4,
   "scrambleSets": [...],
@@ -419,43 +416,250 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `numberOfAttempts` | `Integer` | The number of attempts the competitors has to get an attempt better than `attemptResult`. |
-| `attemptResult` | [`AttemptResult`](#attemptresult) | The attempt result that needs to be beaten in order to be eligible for the remaining attempts. |
+| `numberOfAttempts` | `Integer` | The number of attempts the competitors has to get an attempt better than `resultValue`. |
+| `resultValue` | [`ResultValue`](#resultvalue) | The attempt result that needs to be beaten in order to be eligible for the remaining attempts. |
 
 #### Example
 
 ```json
 {
   "numberOfAttempts": 2,
-  "attemptResult": 3000,
+  "resultValue": 3000,
 }
 ```
 
-### AdvancementCondition
+### ParticipationRuleset
 
-Represents a requirement a competitor must satisfy in the given round in order to advance to the next round of the event.
+Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
-Regardless of the advancement condition type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
+Regardless of the participation ruleset type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `"ranking"\|"percent"\|"attemptResult"` | The type of advancement condition. Either of ranking (top N competitors), percent (top X% of competitors) or attempt result (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
-| `level` | [`Ranking`](#ranking)\|[`Percent`](#percent)\|[`AttemptResult`](#attemptresult) | The parameter of advancement condition of the given type. |
+| `participationSource` | [`ParticipationSource`](#participationsource) | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
-### Ranking
+### ParticipationSource
 
-An `Integer` number of competitors.
+An object indicating where a round should draw its participating competitors from. One of `registrations`, `round` or `linkedRounds`, differentiated by the `type` field.
 
-### Percent
+#### Registrations 
 
-An `Integer` (between 0 and 100, inclusive) representing a percent of competitors (rounded down to the nearest integer).
+Indicates that all registered competitors should take part in the round.  
 
-### AttemptResult
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `registrations` |
 
-An `Integer` representing a competitor result in a single attempt.
+##### Example
+
+```json
+{
+  "type": "registrations",
+}
+```
+
+#### Round
+
+Apply the `resultCondition` to competitor results from the given `roundId` to determine who participates in the round.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `round` |
+| `roundId` | `String` | Indicates the round from which competitors should be considered. | 
+| `resultCondition` | [`ResultCondition`](#resultcondition) | The requirement a competitor must satisfy to be included in the round. |
+
+##### Example
+
+```json
+{
+  "type": "round",
+  "roundId": "333-r1",
+  "resultCondition": {...}
+}
+```
+
+#### LinkedRounds
+
+Each competitor's should be ranked according to their best result from across all `roundIds`, and then a `resultCondition` should be applied to determine who participates in the round. 
+
+In practical terms, this is an implementation of [Dual Rounds](https://www.worldcubeassociation.org/regulations/#9v), designed to leave open the possibility that more than just two rounds might have their results combined in future.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `linkedRounds` |
+| `roundIds` | [`String`] | Only present for `type: "linkedRounds"`. The best result for each competitor from across all listed rounds will be used for determining participation. | 
+| `resultCondition` | [`ResultCondition`](#resultcondition) | The requirement a competitor must satisfy to be included in the round. |
+
+##### Example
+
+```json
+{
+  "type": "linkedRounds",
+  "roundIds": ["333-r1", "333-r2"],
+  "resultCondition": {...}
+}
+```
+
+### ReservedPlaces
+
+Places in a finals reserved for competitors from the nationality or continent hosting the competition, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b).
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `nationalities` | [[`CountryCode`](#countrycode)] | List of all ISO-3166-1 country codes for whom reservations are in effect. |
+| `count` | `Integer` | The number of places reserved for competitors from the `nationalities` list. Note that the reserved places are shared across all listed nationalities - the Top N competitors from _all_ listed countries will fill the reserved places.  |
+
+#### Example
+
+```json
+// Argentina national championship - reservations are only in effect for the hosting country 
+{
+  "nationalities": ["AR"],
+  "reservations": 8
+}
+```
+
+```json
+// South American continental championship - all South American countries are listed for reservations
+{
+  "nationalities": ["AR", "BO", "BR", "CL", "CO", "EC", "GY", "PY", "PE", "SR", "UY", "VE", "XS"],
+  "reservations": 8
+}
+```
+
+### Qualification
+
+Represents a requirement that a person must satisfy to qualify to register for the given event.
+See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements Policy](https://documents.worldcubeassociation.org/documents/policies/external/Competition%20Requirements.pdf) for more details.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `earliestResultDate` | [`Date`](#date)\|`null` | An optional field indicating a date from which a result must have been achieved in order to meet the qualification. In practice, this would be to ensure that qualification spots are taken by active, in-form competitors. |
+| `latestResultDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
+| `resultCondition` | [`ResultCondition`](#resultcondition) | Specifies the requirement a competitor must satisfy to register. Only ResultCondition types `resultValue` and `ranking` are used for Qualification. |
+
+#### Examples
+
+```json
+{
+  "earliestResultDate": null,
+  "latestResultDate": "2020-04-25",
+  "resultCondition": {...}
+}
+```
+
+### Result
+
+Represents a competitor result in a single round.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `personId` | `Integer` | The corresponding person `registrantId`. |
+| `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
+| `attempts` | [`[Attempt]`](#attempt) | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
+| `best` | [`ResultValue`](#resultvalue) | The best single result value of `attempts`. |
+| `average` | [`ResultValue`](#resultvalue) | The average result value of `attempts`. Average calculation depends on the [Format](#format) - usually average of 5, mean of 3 or best of 5. |
+
+#### Example
+
+```json
+{
+  "personId": 1,
+  "ranking": 10,
+  "attempts": [...],
+  "best": 720,
+  "average": 950
+}
+```
+
+### Attempt
+
+Represents one of attempts a competitor got during the given round.
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `value` | [`ResultValue`](#resultvalue) | The achieved attempt result. |
+| `reconstruction` | `String\|null` | An optional reconstruction of the attempt. |
+
+#### Example
+
+```json
+{
+  "result": 650,
+  "reconstruction": "z y2 U Rw' D2 L F' L' D' ..."
+}
+```
+
+### ResultCondition
+
+An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](#participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
+
+#### ResultAchieved
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `resultAchieved`
+| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. 
+| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition.
+
+##### Example
+```json
+// Any `single` meets the ResultCondition
+{
+    "type": "resultAchieved",
+    "scope": "single",
+    "value": null
+}
+```
+
+```json
+// An average under 10 seconds meets the ResultCondition
+{
+    "type": "resultAchieved",
+    "scope": "average",
+    "value": 1000
+}
+```
+
+#### Ranking
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `ranking`
+| `value` |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
+
+##### Example
+```json
+// Top 16 competitors meet the ResultCondition
+{
+    "type": "percent",
+    "value": 16
+}
+```
+
+#### Percent
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `type` | `String` | Always `percent`
+| `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`)
+
+##### Example
+
+```json
+// Top 70% of competitors meet the ResultCondition
+{
+    "type": "percent",
+    "value": 70
+}
+```
+
+### ResultValue
+
+An `Integer` representing a result (either single or average) achieved by a competitor.
 
 The following values are defined to have special meaning:
-- `0` represents a skipped attempt (e.g. an attempt may be skipped if a competitor does not meet the cutoff)
 - `-1` represents a DNF (Did Not Finish)
 - `-2` represents a DNS (Did Not Start)
 
@@ -477,89 +681,6 @@ An attempt result `0DDTTTTTMM` encodes the following information:
 
 *Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
 As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
-
-### Qualification
-
-Represents a requirement that a person must satisfy to qualify to register for the given event.
-See paragraph 5.1 of [WCA Competition Requirements Policy](https://www.worldcubeassociation.org/documents/policies/external/Competition%20Requirements.pdf) for more details.
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `whenDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
-| `type` | `"attemptResult"\|"ranking"\|"anyResult"` | The type of qualification. Either of ranking (top N competitors), attempt result (competitors with result better than Y - either single or average) or any result (competitors with any successful result of the given type). |
-| `resultType` | `"single"\|"average"` | The type of result the requirement refers to. |
-| `level` | [`AttemptResult`](#attemptresult)\|[`Ranking`](#ranking)\|`null` | The parameter of the qualification condition of the given type. Not used with `anyResult`. |
-
-#### Examples
-
-```json
-{
-  "whenDate": "2020-04-25",
-  "type": "attemptResult",
-  "resultType": "single",
-  "level": 6000
-}
-```
-
-```json
-{
-  "whenDate": "2020-04-25",
-  "type": "ranking",
-  "resultType": "average",
-  "level": 50
-}
-```
-
-```json
-{
-  "whenDate": "2020-04-25",
-  "type": "anyResult",
-  "resultType": "single",
-  "level": null
-}
-```
-
-### Result
-
-Represents a competitor result in a single round.
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `personId` | `Integer` | The corresponding person `registrantId`. |
-| `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
-| `attempts` | [`[Attempt]`](#attempt) | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
-| `best` | [`AttemptResult`](#attemptresult) | The best attempt result of `attempts`. |
-| `average` | [`AttemptResult`](#attemptresult) | The average attempt result of `attempts` (depending on the format, either average of 5 or mean of 3). |
-
-#### Example
-
-```json
-{
-  "personId": 1,
-  "ranking": 10,
-  "attempts": [...],
-  "best": 720,
-  "average": 950
-}
-```
-
-### Attempt
-
-Represents one of attempts a competitor got during the given round.
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `result` | [`AttemptResult`](#attemptresult) | The achieved attempt result. |
-| `reconstruction` | `String\|null` | An optional reconstruction of the attempt. |
-
-#### Example
-
-```json
-{
-  "result": 650,
-  "reconstruction": "z y2 U Rw' D2 L F' L' D' ..."
-}
-```
 
 ### ScrambleSet
 

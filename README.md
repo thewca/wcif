@@ -4,7 +4,9 @@ The official specification of the [WCA Competition Interchange Format](./specifi
 
 ## Versioning
 
-This document is for v1.1, the current `stable` version of WCIF. See [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md) for more information.
+This document is for v2.0.0, the current `latest` version of WCIF. See the following for more information:
+- [Changelog](https://github.com/thewca/wcif/blob/latest/changelog.md) for more information.
+- [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/latest/versioning-policy.md) for more information.
 
 ## Implementation notes
 
@@ -23,7 +25,7 @@ Publicly available (with the confidential attributes stripped out). *Note: the d
 
 Restricted to competition managers. Additionally, a `PATCH` request allows for saving the data (currently a significant subset of it).
 
-[^1] These will always return the latest stable version - see [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/master/versioning-policy.md) to request a specific version.
+[^1] These will always return the latest stable version - see [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/latest/versioning-policy.md) to request a specific version.
 
 ## Note on WCA Live
 
