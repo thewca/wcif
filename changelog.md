@@ -10,10 +10,13 @@ Changes from v1.1 are as follows:
 - Renamed `AttemptResult` to `ResultValue`
     - Renamed `Attempt.result` to `Attempt.value`
     - Renamed `PersonalBest.best` to `PersonalBest.value`
+- Renamed `Qualification.whenDate` to `Qualification.latestResultDate`
+
 
 ### Minor
 - Added value `h` to `round.format` enum - `h` corresponds to the Head-to-Head format described in the [2026 Regulations](https://www.worldcubeassociation.org/regulations/#article-I-headtohead).
 - Added `linkedRounds` field to `Round` object, which indicates a round's participation in a [Dual Round](https://www.worldcubeassociation.org/regulations/#9v).
+- Added `Qualification.earliestResultDate`, to prepare for upcoming WCRP changes
 
 ## v1.1.0: Changelog from v1.0
 
