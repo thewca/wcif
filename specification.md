@@ -42,6 +42,7 @@ The specification defines the following types:
 - [RegistrationInfo](#RegistrationInfo)
 - [Result](#Result)
 - [ResultCondition](#ResultCondition)
+- [ResultValue](#ResultValue)
 - [Role](#Role)
 - [Room](#Room)
 - [Round](#Round)
@@ -166,7 +167,6 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 ```json
 "US"
 ```
-
 
 ### CurrencyCode
 
@@ -528,33 +528,6 @@ Places in a finals reserved for competitors from the nationality or continent ho
 }
 ```
 
-### ResultValue
-
-An `Integer` representing a result (either single or average) achieved by a competitor.
-
-The following values are defined to have special meaning:
-- `-1` represents a DNF (Did Not Finish)
-- `-2` represents a DNS (Did Not Start)
-
-In the default case the value represents the number of centiseconds measured
-(e.g. `1:10.25` would be represented as `7025`).
-
-For 3x3x3 Fewest Moves the value represents the number of moves,
-but averages are represented as 100 times the average
-(i.e. an single result of `25` moves is represented as `25`, while an average result of `25.33` moves is represented as `2533`).
-
-For 3x3x3 Multi-Blind the value encodes the time as well as the number of cubes attempted and solved
-(designed so that a lower value means a better result).\
-An attempt result `0DDTTTTTMM` encodes the following information:
-- `timeInSeconds = TTTTT (99999 means unknown)`
-- `difference    = 99 - DD`
-- `missed        = MM`
-- `solved        = difference + missed`
-- `attempted     = solved + missed`
-
-*Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
-As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
-
 ### Qualification
 
 Represents a requirement that a person must satisfy to qualify to register for the given event.
@@ -574,7 +547,6 @@ See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements P
   "resultCondition": {...}
 }
 ```
-
 
 ### Result
 
@@ -648,6 +620,34 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
     "value": 1000
 }
 ```
+
+### ResultValue
+
+An `Integer` representing a result (either single or average) achieved by a competitor.
+
+The following values are defined to have special meaning:
+- `-1` represents a DNF (Did Not Finish)
+- `-2` represents a DNS (Did Not Start)
+
+In the default case the value represents the number of centiseconds measured
+(e.g. `1:10.25` would be represented as `7025`).
+
+For 3x3x3 Fewest Moves the value represents the number of moves,
+but averages are represented as 100 times the average
+(i.e. an single result of `25` moves is represented as `25`, while an average result of `25.33` moves is represented as `2533`).
+
+For 3x3x3 Multi-Blind the value encodes the time as well as the number of cubes attempted and solved
+(designed so that a lower value means a better result).\
+An attempt result `0DDTTTTTMM` encodes the following information:
+- `timeInSeconds = TTTTT (99999 means unknown)`
+- `difference    = 99 - DD`
+- `missed        = MM`
+- `solved        = difference + missed`
+- `attempted     = solved + missed`
+
+*Note: the leading zero indicates that this is the New Multi-Blind format, as opposed to the Old one having a leading 1.
+As the other format is very old and doesn't need to be supported by new applications, the specification omits it entirely.*
+
 
 
 #### Ranking
