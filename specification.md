@@ -169,9 +169,7 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 
 ### ResultCondition
 
-An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationRuleset. It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
-
-#TODO: Links!
+An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
 
 #### ResultAchieved
 
@@ -502,7 +500,7 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | [`Source`](#participationrulesetsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `source` | [`ParticipationSource`](#participationsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 ### ParticipationSource
