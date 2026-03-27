@@ -169,7 +169,7 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 
 ### ResultCondition
 
-An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
+An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](#participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
 
 #### ResultAchieved
 
