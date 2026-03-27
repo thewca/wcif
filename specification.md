@@ -46,7 +46,7 @@ The specification defines the following types:
 - [Room](#Room)
 - [Round](#Round)
 - [Series](#Series)
-- [ParticipationData](#ParticipationCondition)
+- [ParticipationRuleset](#ParticipationRuleset)
 - [ReservedPlaces](#ReservedPlaces)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
@@ -168,7 +168,7 @@ A `String` representing the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/I
 
 ### ResultCondition
 
-An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationData. It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
+An object representing the criteria a competitor needs to meet to satisfy a Qualification or ParticipationRuleset. It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
 
 #TODO: Links!
 
@@ -205,7 +205,7 @@ An object representing the criteria a competitor needs to meet to satisfy a Qual
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `ranking`
-| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationData)
+| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationRuleset)
 
 ##### Example
 ```json
@@ -493,7 +493,7 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 }
 ```
 
-### ParticipationData
+### ParticipationRuleset
 
 Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) to include should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
@@ -502,10 +502,9 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `source` | [`Source`](#participationconditionsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `attemptResult` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
-| `resultCondition` | [`ResultCondition`](#resultcondition)\|`null` | The requirement a competitor must satisfy to be included in the round. `null` indicates that all competitors from the `source` take part in the round. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
-### ParticipationData.Source
+### ParticipationRuleset.Source
 
 An object indicating where a round should draw its participating competitors from. One of `registrations`, `round` or `linkedRounds`, differentiated by the `type` field.
 
