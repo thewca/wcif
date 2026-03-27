@@ -176,7 +176,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `resultAchieved`
-| `scope` | `"single"\|"average"\|"` | Specifies if the result should be a `single` or `average`. 
+| `scope` | `"single"\|"average"` | Specifies if the result should be a `single` or `average`. 
 | `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition.
 
 ##### Example
