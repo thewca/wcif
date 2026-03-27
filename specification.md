@@ -47,6 +47,7 @@ The specification defines the following types:
 - [Round](#Round)
 - [Series](#Series)
 - [ParticipationRuleset](#ParticipationRuleset)
+- [ParticipationSource](#ParticipationSource)
 - [ReservedPlaces](#ReservedPlaces)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
@@ -504,7 +505,7 @@ Regardless of the advancement condition type, [regulation 9p1](https://www.world
 | `source` | [`Source`](#participationrulesetsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
-### ParticipationRuleset.Source
+### ParticipationSource
 
 An object indicating where a round should draw its participating competitors from. One of `registrations`, `round` or `linkedRounds`, differentiated by the `type` field.
 
@@ -566,6 +567,33 @@ In practical terms, this is an implementation of [Dual Rounds](https://www.world
 }
 ```
 
+### ReservedPlaces
+
+Places in a finals reserved for competitors from the nationality or continent hosting the competition, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b).
+
+| Attribute | Type | Description |
+| --- | --- | --- |
+| `nationalities` | [[`CountryCode`](#countrycode)] | List of all ISO-3166-1 country codes for whom reservations are in effect. |
+| `count` | `Integer` | The number of places reserved for competitors from the `nationalities` list. Note that the reserved places are shared across all listed nationalities - the Top N competitors from _all_ listed countries will fill the reserved places.  |
+
+#### Example
+
+```json
+// Argentina national championship - reservations are only in effect for the hosting country 
+{
+  "nationalities": ["AR"],
+  "reservations": 8
+}
+```
+
+```json
+// South American continental championship - all South American countries are listed for reservations
+{
+  "nationalities": ["AR", "BO", "BR", "CL", "CO", "EC", "GY", "PY", "PE", "SR", "UY", "VE", "XS"],
+  "reservations": 8
+}
+```
+
 ### ResultValue
 
 An `Integer` representing a result (either single or average) achieved by a competitor.
@@ -612,32 +640,6 @@ See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements P
 }
 ```
 
-### ReservedPlaces
-
-Places in a finals reserved for competitors from the nationality or continent hosting the competition, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b).
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `nationalities` | [[`CountryCode`](#countrycode)] | List of all ISO-3166-1 country codes for whom reservations are in effect. |
-| `count` | `Integer` | The number of places reserved for competitors from the `nationalities` list. Note that the reserved places are shared across all listed nationalities - the Top N competitors from _all_ listed countries will fill the reserved places.  |
-
-#### Example
-
-```json
-// Argentina national championship - reservations are only in effect for the hosting country 
-{
-  "nationalities": ["AR"],
-  "reservations": 8
-}
-```
-
-```json
-// South American continental championship - all South American countries are listed for reservations
-{
-  "nationalities": ["AR", "BO", "BR", "CL", "CO", "EC", "GY", "PY", "PE", "SR", "UY", "VE", "XS"],
-  "reservations": 8
-}
-```
 
 ### Result
 
@@ -669,7 +671,7 @@ Represents one of attempts a competitor got during the given round.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `result` | [`ResultValue`](#resultvalue) | The achieved attempt result. |
+| `value` | [`ResultValue`](#resultvalue) | The achieved attempt result. |
 | `reconstruction` | `String\|null` | An optional reconstruction of the attempt. |
 
 #### Example
