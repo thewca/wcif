@@ -434,7 +434,7 @@ Represents data of a round held at the competition.
 | `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
-| `participationRuleset` | [`ParticipationRuleset`](#participationruleset)\|`null` | The condition specifying which competitors advance to the next round. |
+| `participationRuleset` | [`ParticipationRuleset`](#participationruleset)\|`null` | The ruleset specifying are eligible to compete in the current round. |
 | `results` | [`[Result]`](#result) | List of all round results. |
 | `scrambleSetCount` | `Integer` | The number of scramble sets needed for this round. |
 | `scrambleSets` | [`[ScrambleSet]`](#scrambleset) | List of scramble sets used in this round. |
