@@ -177,7 +177,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | --- | --- | --- |
 | `type` | `String` | Always `resultAchieved`
 | `scope` | `"single"\|"average"\|"`\|`null` | Specifies if the result should be a `single` or `average`. 
-| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the Condition.
+| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition.
 
 ##### Example
 ```json
@@ -204,7 +204,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `ranking`
-| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `source` (ParticipationRuleset)
+| `value` | |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
 
 ##### Example
 ```json
@@ -380,7 +380,7 @@ Represents an official personal record.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `eventId` | `String` | Identifier of the WCA event. |
-| `best` | [`ResultValue`](#resultvalue) | The actual record value. |
+| `value` | [`ResultValue`](#resultvalue) | The actual record value. |
 | `type` | `"single"\|"average"` | The type of the record. |
 | `worldRanking` | `Integer` | The position in the official world ranking. |
 | `continentalRanking` | `Integer` | The position in the official continental ranking. |
@@ -494,13 +494,13 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 
 ### ParticipationRuleset
 
-Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) to include should compete in it.
+Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
 Regardless of the participation ruleset type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `source` | [`ParticipationSource`](#participationsource) | The type of participation condition. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `participationSource` | [`ParticipationSource`](#participationsource) | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 ### ParticipationSource
@@ -648,8 +648,8 @@ Represents a competitor result in a single round.
 | `personId` | `Integer` | The corresponding person `registrantId`. |
 | `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
 | `attempts` | [`[Attempt]`](#attempt) | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
-| `best` | [`ResultValue`](#resultvalue) | The best attempt result of `attempts`. |
-| `average` | [`ResultValue`](#resultvalue) | The average attempt result of `attempts` (depending on the format, either average of 5 or mean of 3). |
+| `best` | [`ResultValue`](#resultvalue) | The best single result value of `attempts`. |
+| `average` | [`ResultValue`](#resultvalue) | The average result value of `attempts`. Average calculation depends on the [Format](#format) - usually average of 5, mean of 3 or best of 5. |
 
 #### Example
 

@@ -7,8 +7,9 @@ Changes from v1.1 are as follows:
 - `ResultCondition` object added, which is used by both `ParticipationRuleset` and `Qualification`
 - `Qualification` object changed to make use of `ResultCondition`
 - `ParticipationRuleset` includes `ReservedPlaces`, which implements [Regulation 9p2b](https://www.worldcubeassociation.org/regulations/#9p2b)
-- Renamed `ResultAttempt` to `ResultValue`
-- Renamed `Attempt.result` to `Attempt.value`
+- Renamed `AttemptResult` to `ResultValue`
+    - Renamed `Attempt.result` to `Attempt.value`
+    - Renamed `PersonalBest.best` to `PersonalBest.value`
 
 ### Minor
 - Added value `h` to `round.format` enum - `h` corresponds to the Head-to-Head format described in the [2026 Regulations](https://www.worldcubeassociation.org/regulations/#article-I-headtohead).
