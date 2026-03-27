@@ -434,7 +434,7 @@ Represents data of a round held at the competition.
 | `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
-| `advancementCondition` | [`AdvancementCondition`](#advancementcondition)\|`null` | The condition specifying which competitors advance to the next round. |
+| `participationRuleset` | [`ParticipationRuleset`](#participationruleset)\|`null` | The condition specifying which competitors advance to the next round. |
 | `results` | [`[Result]`](#result) | List of all round results. |
 | `scrambleSetCount` | `Integer` | The number of scramble sets needed for this round. |
 | `scrambleSets` | [`[ScrambleSet]`](#scrambleset) | List of scramble sets used in this round. |
@@ -448,7 +448,7 @@ Represents data of a round held at the competition.
   "format": "a",
   "timeLimit": {...},
   "cutoff": {...},
-  "advancementCondition": {...},
+  "participationRuleset": {...},
   "results": [...],
   "scrambleSetCount": 4,
   "scrambleSets": [...],
@@ -496,7 +496,7 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 
 Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) to include should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
-Regardless of the advancement condition type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
+Regardless of the participation ruleset type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
