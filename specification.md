@@ -543,7 +543,8 @@ See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements P
 
 ```json
 {
-  "whenDate": "2020-04-25",
+  "earliestResultDate": null,
+  "latestResultDate": "2020-04-25",
   "resultCondition": {...}
 }
 ```
