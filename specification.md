@@ -538,7 +538,7 @@ See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements P
 | --- | --- | --- |
 | `earliestResultDate` | [`Date`](#date)\|`null` | An optional field indicating a date from which a result must have been achieved in order to meet the qualification. In practice, this would be to ensure that qualification spots are taken by active, in-form competitors. |
 | `latestResultDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
-| `resultCondition` | [`ResultCondition`](#resultcondition) | Specifies the requirement a competitor must satisfy to register. Only ResultCondition types `resltAchieved` and `ranking` are used for Qualification. |
+| `resultCondition` | [`ResultCondition`](#resultcondition) | Specifies the requirement a competitor must satisfy to register. Only ResultCondition types `resultAchieved` and `ranking` are used for Qualification. |
 
 #### Examples
 
