@@ -4,7 +4,7 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 2.0.0
+- Number: 2.0.1
 - Status: Latest
 - Next Status: Stable
 - Status Advancement Date: N/A
