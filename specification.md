@@ -327,7 +327,7 @@ Represents an official personal record.
 ```json
 {
   "eventId": "333",
-  "best": 790,
+  "value": 790,
   "type": "single",
   "worldRanking": 995,
   "continentalRanking": 105,
@@ -366,7 +366,7 @@ Represents data of a round held at the competition.
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `id` | `String` | The round identifier of the form `{eventId}-r{roundNumber}`. *Note: this is a valid [`ActivityCode`](#activitycode).* |
-| `linkedRounds` | [`String`] | A list of round ID's indicating the rounds which this round is linked to, for the purposes of implementing [Dual Rounds](https://www.worldcubeassociation.org/regulations/#9v). LinkedRounds have their results considered together for the purpose of participation in subsequent rounds in the competition. |
+| `linkedRounds` | [`String`]\|`null` | A list of round ID's indicating the rounds which this round is linked to, for the purposes of implementing [Dual Rounds](https://www.worldcubeassociation.org/regulations/#9v). LinkedRounds have their results considered together for the purpose of participation in subsequent rounds in the competition. |
 | `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
@@ -381,6 +381,7 @@ Represents data of a round held at the competition.
 ```json
 {
   "id": "333-r1",
+  "linkedRounds": ["333-r1", "333-r2"],
   "format": "a",
   "timeLimit": {...},
   "cutoff": {...},
@@ -437,7 +438,7 @@ Regardless of the participation ruleset type, [regulation 9p1](https://www.world
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `participationSource` | [`ParticipationSource`](#participationsource) | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
-| `reservedPlaces` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
+| `reservedPlaces`\|`null` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 ### ParticipationSource
 
@@ -537,7 +538,7 @@ See "Announcement Criteria" paragraph 5.1 in the [WCA Competition Requirements P
 | --- | --- | --- |
 | `earliestResultDate` | [`Date`](#date)\|`null` | An optional field indicating a date from which a result must have been achieved in order to meet the qualification. In practice, this would be to ensure that qualification spots are taken by active, in-form competitors. |
 | `latestResultDate` | [`Date`](#date) | The date by which the qualification requirement must be satisfied.  If a result is set in a multiple-day competition which ends before this date, that is considered to have been set by this date. |
-| `resultCondition` | [`ResultCondition`](#resultcondition) | Specifies the requirement a competitor must satisfy to register. Only ResultCondition types `resultValue` and `ranking` are used for Qualification. |
+| `resultCondition` | [`ResultCondition`](#resultcondition) | Specifies the requirement a competitor must satisfy to register. Only ResultCondition types `resltAchieved` and `ranking` are used for Qualification. |
 
 #### Examples
 
@@ -586,7 +587,7 @@ Represents one of attempts a competitor got during the given round.
 
 ```json
 {
-  "result": 650,
+  "value": 650,
   "reconstruction": "z y2 U Rw' D2 L F' L' D' ..."
 }
 ```
