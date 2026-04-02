@@ -634,7 +634,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 ```json
 // Top 16 competitors meet the ResultCondition
 {
-    "type": "percent",
+    "type": "ranking",
     "value": 16
 }
 ```
