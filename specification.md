@@ -438,7 +438,7 @@ Regardless of the participation ruleset type, [regulation 9p1](https://www.world
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `participationSource` | [`ParticipationSource`](#participationsource) | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
-| `reservedPlaces`\|`null` | [`ReservedPlaces`](#reservedplaces) | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
+| `reservedPlaces` | [`ReservedPlaces`](#reservedplaces)\|`null` | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 ### ParticipationSource
 
