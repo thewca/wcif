@@ -1,8 +1,11 @@
+## v2.0.1: Change from v2.0.0
+
+### Patch: 
+- Corrected usage of field names and clarified which fields may also return null values.
+
 ## v2.0.0: Changelog from v1.1
 
-Changes from v1.1 are as follows:
-
-### Major
+### Major:
 - Replaced `AdvancementCondition` object with `ParticipationRuleset`
 - `ResultCondition` object added, which is used by both `ParticipationRuleset` and `Qualification`
 - `Qualification` object changed to make use of `ResultCondition`
@@ -20,5 +23,5 @@ Changes from v1.1 are as follows:
 
 ## v1.1.0: Changelog from v1.0
 
-Changes from v1.0 are as follows:
+### Minor:
 - Added value `5` to `round.format` enum - `5` corresponds to a Best of 5 format as described in the [2026 Regulation Changes](https://github.com/thewca/wca-regulations-january-2026/pull/48).
