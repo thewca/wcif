@@ -1,3 +1,12 @@
+## v2.1.1: Change from v2.0.1
+
+### Minor
+- Added `scope` to `ResultCondition` types `ranking` and `percent`, to clarify whether the single or average should be used to determine ranking.
+
+### Patch
+- Clarified that `ParticipationSource` may be `null` for competitions during and before 2021.
+
+
 ## v2.0.1: Change from v2.0.0
 
 ### Patch: 

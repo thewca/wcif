@@ -4,7 +4,7 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 2.0.1
+- Number: 2.1.1
 - Status: Latest
 - Next Status: Stable
 - Status Advancement Date: N/A
@@ -437,7 +437,7 @@ Regardless of the participation ruleset type, [regulation 9p1](https://www.world
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `participationSource` | [`ParticipationSource`](#participationsource) | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). |
+| `participationSource` | [`ParticipationSource`](#participationsource)\|`null` | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). May only be `null` for competitions from 2021 and before. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces)\|`null` | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
 
 ### ParticipationSource
@@ -600,9 +600,9 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `String` | Always `resultAchieved`
-| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. 
-| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition.
+| `type` | `String` | Always `resultAchieved` |
+| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. |
+| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition. |
 
 ##### Example
 ```json
@@ -627,7 +627,8 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `String` | Always `ranking`
+| `type` | `String` | Always `ranking` |
+| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the event format, and cannot be changed via a WCIF patch.. |
 | `value` |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
 
 ##### Example
@@ -635,6 +636,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 // Top 16 competitors meet the ResultCondition
 {
     "type": "ranking",
+    "scope": "average",
     "value": 16
 }
 ```
@@ -644,6 +646,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `percent`
+| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the event format, and cannot be changed via a WCIF patch.. |
 | `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`)
 
 ##### Example
@@ -652,6 +655,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 // Top 70% of competitors meet the ResultCondition
 {
     "type": "percent",
+    "scope": "single",
     "value": 70
 }
 ```
