@@ -628,7 +628,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `ranking` |
-| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the event format, and cannot be changed via a WCIF patch.. |
+| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the Round format, and cannot be changed via a WCIF patch. |
 | `value` |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
 
 ##### Example
@@ -646,7 +646,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `percent`
-| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the event format, and cannot be changed via a WCIF patch.. |
+| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the Round format, and cannot be changed via a WCIF patch. |
 | `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`)
 
 ##### Example
