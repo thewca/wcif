@@ -11,7 +11,9 @@ We will follow [SemVer](https://semver.org/)’s Major.Minor.Patch format, defin
     - Major changes in business logic - such as the addition of a new round format or advancement type.[^1]
 - **Minor**: increments upon the addition of new functionality that maintains _forward compatibility_ - ie, existing implementations can continue without error
     - Adding a new field, adding values to an existing enum
-- **Patch**: a change which does not meaningfully alter API output - for example, bugfixes that alter incorrect behaviour to align with documented behaviour
+- **Patch**: clerical changes improving spec clarity, or a change which does not meaningfully alter API output
+    - Correcting an inconsistency in field naming between documentation and the example of the documentation
+    - Bugfixes that alter incorrect behaviour to align with documented behaviour
 
 [^1] Sometimes these changes may "just" take the form of a new enum value, which would usually be handled by a Minor version increment. In certain cases, however, the change to business logic is significant enough to mandate a Major version change, to ensure that backwards-compatibility doesn't allow third-party tools to create undesireable outcomes (such as incorrectly determining round advancement from a new round advancement criterion). 
 
