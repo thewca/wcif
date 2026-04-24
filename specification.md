@@ -85,7 +85,7 @@ Represents the root object and is usually referred to as a WCIF.
   "persons": [...],
   "events": [...],
   "schedule": {...},
-  "registrationInfo": [...],
+  "registrationInfo": {...},
   "competitorLimit": 1000,
   "extensions": [...]
 }
@@ -129,9 +129,9 @@ Represents a person related to the competition (not necessarily a competitor).
 | `gender` | `"m"\|"f"\|"o"` | The person gender. Either male, female or other. |
 | `birthdate` | [`Date`](#date) | The person birthdate. *Note: this attribute is not public.* |
 | `email` | `String` | The person email address. *Note: this attribute is not public.* |
-| `avatar` | `Avatar\|null` | The person avatar image. |
+| `avatar` | [`Avatar`](#avatar)\|`null` | The person avatar image. |
 | `roles` | [`[Role]`](#role) | List of roles assigned to this person at the competition. |
-| `registration` | [`[Registration]`](#registration)\|`null` | All the data related to the online registration for the competition. May be `null` if the person hasn't registered, but is still relevant to the competition (e.g. organizer, delegate). |
+| `registration` | [`Registration`](#registration)\|`null` | All the data related to the online registration for the competition. May be `null` if the person hasn't registered, but is still relevant to the competition (e.g. organizer, delegate). |
 | `assignments` | [`[Assignment]`](#assignment) | List of task assignments. |
 | `personalBests` | [`[PersonalBest]`](#personalbest) | List of official personal records. |
 | `extensions` | [`[Extension]`](#extension) | List of custom person extensions. |
@@ -369,7 +369,7 @@ Represents data of a round held at the competition.
 | `format` | `"1"\|"2"\|"3"\|"5"\|"a"\|"m"\|"h"` | The round format. Look [here](https://github.com/thewca/worldcubeassociation.org/blob/main/lib/static_data/formats.json) for the list of all the WCA formats. |
 | `timeLimit` | [`TimeLimit`](#timelimit)\|`null` | The time limit in this round. For events with unchangeable time limit (3x3x3 MBLD, 3x3x3 FM) the value is `null`. |
 | `cutoff` | [`Cutoff`](#cutoff)\|`null` | The cutoff in this round. |
-| `participationRuleset` | [`ParticipationRuleset`](#participationruleset)\|`null` | The ruleset specifying are eligible to compete in the current round. |
+| `participationRuleset` | [`ParticipationRuleset`](#participationruleset)\|`null` | The ruleset specifying which competitors are eligible to compete in the current round. |
 | `results` | [`[Result]`](#result) | List of all round results. |
 | `scrambleSetCount` | `Integer` | The number of scramble sets needed for this round. |
 | `scrambleSets` | [`[ScrambleSet]`](#scrambleset) | List of scramble sets used in this round. |
@@ -416,7 +416,7 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `numberOfAttempts` | `Integer` | The number of attempts the competitors has to get an attempt better than `resultValue`. |
+| `numberOfAttempts` | `Integer` | The number of attempts the competitor has to get an attempt better than `resultValue`. |
 | `resultValue` | [`ResultValue`](#resultvalue) | The attempt result that needs to be beaten in order to be eligible for the remaining attempts. |
 
 #### Example
@@ -438,6 +438,8 @@ Regardless of the participation ruleset type, [regulation 9p1](https://www.world
 | --- | --- | --- |
 | `participationSource` | [`ParticipationSource`](#participationsource)\|`null` | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). May only be `null` for competitions from 2021 and before. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces)\|`null` | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
+
+#### Example
 
 ```json
 {
@@ -601,7 +603,7 @@ Represents one of attempts a competitor got during the given round.
 
 ### ResultCondition
 
-An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](#participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the type field.
+An object representing the criteria a competitor needs to meet to satisfy a [Qualification](#qualification) or [ParticipationRuleset](#participationruleset). It can be one of `ResultAchieved`, `Ranking` or `Percent`, distinguished by the `type` field.
 
 #### ResultAchieved
 
@@ -609,7 +611,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | --- | --- | --- |
 | `type` | `String` | Always `resultAchieved` |
 | `scope` | `"single"\|"average"` | Specifies if the result should be a `single` or `average`. |
-| `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition. |
+| `value` | `ResultValue`\|`null` | Specifies the `ResultValue` necessary to meet the `ResultCondition`. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition. |
 
 ##### Example
 ```json
@@ -652,7 +654,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `type` | `String` | Always `percent`
+| `type` | `String` | Always `percent` |
 | `scope` | `"single"\|"average"` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the Round format, and cannot be changed via a WCIF patch. |
 | `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`) |
 
@@ -680,7 +682,7 @@ In the default case the value represents the number of centiseconds measured
 
 For 3x3x3 Fewest Moves the value represents the number of moves,
 but averages are represented as 100 times the average
-(i.e. an single result of `25` moves is represented as `25`, while an average result of `25.33` moves is represented as `2533`).
+(i.e. a single result of `25` moves is represented as `25`, while an average result of `25.33` moves is represented as `2533`).
 
 For 3x3x3 Multi-Blind the value encodes the time as well as the number of cubes attempted and solved
 (designed so that a lower value means a better result).\
