@@ -65,7 +65,7 @@ Represents the root object and is usually referred to as a WCIF.
 | `id` | `String` | The unique competition identifier. |
 | `name` | `String` | The full name of the competition. |
 | `shortName` | `String` | A briefer version of `name`, may be the same if `name` is already short. |
-| `series` | `[Series]`(#series)\|`null` | The Competition Series that this competition is part of, if any. |
+| `series` | `[Series](#series)`\|`null` | The Competition Series that this competition is part of, if any. |
 | `persons` | [`[Person]`](#person) | List of all the people related to the competition. |
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
