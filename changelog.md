@@ -6,7 +6,6 @@
 ### Patch
 - Clarified that `ParticipationSource` may be `null` for competitions during and before 2021.
 
-
 ## v2.0.1: Change from v2.0.0
 
 ### Patch: 

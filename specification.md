@@ -1,13 +1,12 @@
 # WCIF
 
-WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
-It's designed as a way for many applications to exchange data in a standardized manner.
-
 ## Version
 - Number: 2.1.1
 - Status: Latest
 - Next Status: Stable
 - Status Advancement Date: N/A
+
+## Overview
 
 WCIF stands for WCA Competition Interchange Format and is a specification of competition data in JSON format.
 It's designed as a way for many applications to exchange data in a standardized manner.
@@ -15,7 +14,7 @@ It's designed as a way for many applications to exchange data in a standardized 
 If you intend to read/write WCIF from the WCA website in your application, please:
 - Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/stable/versioning-policy.md)
 - [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
-- Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
+- Optionally, configure your application to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
 ## Objects
 
@@ -35,24 +34,24 @@ The specification defines the following types:
 - [DateTime](#DateTime)
 - [Event](#Event)
 - [Extension](#Extension)
+- [ParticipationRuleset](#ParticipationRuleset)
+- [ParticipationSource](#ParticipationSource)
 - [Person](#Person)
 - [PersonalBest](#PersonalBest)
 - [Qualification](#Qualification)
 - [Registration](#Registration)
 - [RegistrationInfo](#RegistrationInfo)
+- [ReservedPlaces](#ReservedPlaces)
 - [Result](#Result)
 - [ResultCondition](#ResultCondition)
 - [ResultValue](#ResultValue)
 - [Role](#Role)
 - [Room](#Room)
 - [Round](#Round)
-- [Series](#Series)
-- [ParticipationRuleset](#ParticipationRuleset)
-- [ParticipationSource](#ParticipationSource)
-- [ReservedPlaces](#ReservedPlaces)
 - [Schedule](#Schedule)
 - [Scramble](#Scramble)
 - [ScrambleSet](#ScrambleSet)
+- [Series](#Series)
 - [TimeLimit](#TimeLimit)
 - [Venue](#Venue)
 
@@ -70,7 +69,7 @@ Represents the root object and is usually referred to as a WCIF.
 | `persons` | [`[Person]`](#person) | List of all the people related to the competition. |
 | `events` | [`[Event]`](#event) | List of all events held at the competition. |
 | `schedule` | [`Schedule`](#schedule) | All the data related to time and scheduling. |
-| `registrationInfo` | [`RegistrationInfo`] | All the data related to the competition's registration. |
+| `registrationInfo` | [`RegistrationInfo`](#registrationinfo) | All the data related to the competition's registration. |
 | `competitorLimit` | `Integer\|null` | The maximal number of competitors that can register for the competition. |
 | `extensions` | [`[Extension]`](#extension) | List of custom competition extensions. |
 
@@ -425,13 +424,13 @@ Represents an attempt result the competitor needs to beat in one of the first ph
 ```json
 {
   "numberOfAttempts": 2,
-  "resultValue": 3000,
+  "resultValue": 3000
 }
 ```
 
 ### ParticipationRuleset
 
-Represents how a given round "chooses" which competitors from its source (either a preceeding round, or the registration list) should compete in it.
+Represents how a given round "chooses" which competitors from its source (either a preceding round, or the registration list) should compete in it.
 See [regulation 9p2](https://www.worldcubeassociation.org/regulations/#9p2) for more details.
 Regardless of the participation ruleset type, [regulation 9p1](https://www.worldcubeassociation.org/regulations/#9p1) must be applied.
 
@@ -439,6 +438,14 @@ Regardless of the participation ruleset type, [regulation 9p1](https://www.world
 | --- | --- | --- |
 | `participationSource` | [`ParticipationSource`](#participationsource)\|`null` | The type of participation ruleset. Either of `registrations` (all registered competitors) `ranking` (top N competitors), `percent` (top X% of competitors) or `resultValue` (competitors with result better than Y - either single or average as per [9p2+](https://www.worldcubeassociation.org/regulations/guidelines.html#9p2+)). May only be `null` for competitions from 2021 and before. |
 | `reservedPlaces` | [`ReservedPlaces`](#reservedplaces)\|`null` | Places in a finals reserved for competitors from a particular nationality or continent, as defined in [9p2b](https://www.worldcubeassociation.org/regulations/#9p2b). |
+
+```json
+{
+
+    "participationSource": {...},
+    "reservedPlaces": {...}
+}
+```
 
 ### ParticipationSource
 
@@ -482,7 +489,7 @@ Apply the `resultCondition` to competitor results from the given `roundId` to de
 
 #### LinkedRounds
 
-Each competitor's should be ranked according to their best result from across all `roundIds`, and then a `resultCondition` should be applied to determine who participates in the round. 
+Each competitor should be ranked according to their best result from across all `roundIds`, and then a `resultCondition` should be applied to determine who participates in the round. 
 
 In practical terms, this is an implementation of [Dual Rounds](https://www.worldcubeassociation.org/regulations/#9v), designed to leave open the possibility that more than just two rounds might have their results combined in future.
 
@@ -517,7 +524,7 @@ Places in a finals reserved for competitors from the nationality or continent ho
 // Argentina national championship - reservations are only in effect for the hosting country 
 {
   "nationalities": ["AR"],
-  "reservations": 8
+  "count": 8
 }
 ```
 
@@ -525,7 +532,7 @@ Places in a finals reserved for competitors from the nationality or continent ho
 // South American continental championship - all South American countries are listed for reservations
 {
   "nationalities": ["AR", "BO", "BR", "CL", "CO", "EC", "GY", "PY", "PE", "SR", "UY", "VE", "XS"],
-  "reservations": 8
+  "count": 8
 }
 ```
 
@@ -560,7 +567,7 @@ Represents a competitor result in a single round.
 | `ranking` | `Integer\|null` | The ranking in this round. May be `null` if the result is empty (yet to be entered). |
 | `attempts` | [`[Attempt]`](#attempt) | List of attempt results the competitor got. If there are fewer attempts than expected, the rest is considered skipped (effectively `0`). |
 | `best` | [`ResultValue`](#resultvalue) | The best single result value of `attempts`. |
-| `average` | [`ResultValue`](#resultvalue) | The average result value of `attempts`. Average calculation depends on the [Format](#format) - usually average of 5, mean of 3 or best of 5. |
+| `average` | [`ResultValue`](#resultvalue) | The average result value of `attempts`. Average calculation depends on the Round's format - usually average of 5, mean of 3 or best of 5. |
 
 #### Example
 
@@ -601,7 +608,7 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `resultAchieved` |
-| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. |
+| `scope` | `"single"\|"average"` | Specifies if the result should be a `single` or `average`. |
 | `value` | `ResultValue`\|`null` | Species the `ResultValue` necessary to meet the ResultCondition. `null` indicates that any non-DNF/DNS result achieved in the given `scope` will meet the ResultCondition. |
 
 ##### Example
@@ -628,8 +635,8 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `ranking` |
-| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the Round format, and cannot be changed via a WCIF patch. |
-| `value` |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset)
+| `scope` | `"single"\|"average"` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the Round format, and cannot be changed via a WCIF patch. |
+| `value` |`Integer` | Top-N (inclusive) competitors who meet the ResultCondition - ranked by world ranking (Qualification) or results of rounds considered in the `participationSource` (ParticipationRuleset) |
 
 ##### Example
 ```json
@@ -646,8 +653,8 @@ An object representing the criteria a competitor needs to meet to satisfy a [Qua
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `type` | `String` | Always `percent`
-| `scope` | `"single"\|"average""` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the Round format, and cannot be changed via a WCIF patch. |
-| `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`)
+| `scope` | `"single"\|"average"` | Specifies if the result should be a `single` or `average`. For ParticipationRuleset, this will always be determined by the Round format, and cannot be changed via a WCIF patch. |
+| `value` | `Integer` | The top n-% of competitors who meet the ResultCondition (70% will be expressed as `70`) |
 
 ##### Example
 
@@ -903,27 +910,6 @@ Represents custom data that may be added to several WCIF entities.
 | `specUrl` | `String` | A valid URI pointing to a published specification documenting the format of their extension (e.g. using [JSON Schema](https://json-schema.org)). |
 | `data` | `Object` | An object containing an arbitrary extension-specific data compliant with the documented format. |
 
-#### Information
-
-Users of custom extensions should have lower expectations about how permanent the specifications are.
-While fields defined by this specification should be expected not to change regularly,
-users of custom extensions should expect to update their code more regularly as the extension specifications evolve.
-
-Developers who create extensions that become widely used are expected to propose additions of their custom fields to this specification.
-
-Any application that consumes WCIF data should (whenever possible) save extensions as JSON blobs and include them in future WCIF outputs.
-
-#### Motivation
-
-Many developers will find it useful to attach data related to their specific application,
-which may not be used widely-enough to include in this specification. For example:
-- references to entities in their datastores
-- data such as shirt sizes for competitors, which has not yet been proven to be generalized
-- data such as US states where competitors live, which is only relevant to applications in the USA
-
-Finally, this helps to protect the specification from bloat or namespace pollution,
-by allowing developers to introduce new fields before they are proven to be generally useful.
-
 #### Example
 
 ```json
@@ -936,3 +922,23 @@ by allowing developers to introduce new fields before they are proven to be gene
   }
 }
 ```
+
+#### Motivation
+
+Many developers will find it useful to attach data related to their specific application, which may not be used widely-enough to include in this specification. For example:
+- references to entities in their datastores
+- data such as shirt sizes for competitors, which has not yet been proven to be generalized
+- data such as US states where competitors live, which is only relevant to applications in the USA
+
+Finally, this helps to protect the specification from bloat or namespace pollution,
+by allowing developers to introduce new fields before they are proven to be generally useful.
+
+#### Information
+
+Users of custom extensions should have lower expectations about how permanent the specifications are.
+While fields defined by this specification should be expected not to change regularly, users of custom extensions should expect to update their code more regularly as the extension specifications evolve.
+
+Developers who create extensions that become widely used are expected to propose additions of their custom fields to this specification.
+
+Any application that consumes WCIF data should (whenever possible) save extensions as JSON blobs and include them in future WCIF outputs.
+
