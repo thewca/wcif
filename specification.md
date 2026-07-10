@@ -4,7 +4,7 @@ WCIF stands for WCA Competition Interchange Format and is a specification of com
 It's designed as a way for many applications to exchange data in a standardized manner.
 
 ## Version
-- Number: 1.1
+- Number: 1.1.1
 - Status: Stable
 - Next Status: Deprecated
 - Status Advancement Date: N/A
@@ -17,10 +17,22 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 - [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
 - Optionally, configure your apllication to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
 
+## Changelog from v1.1 
+
+- Added "Required Fields" section and marked `id` and `formatVersion` as required
+- `FTO` will be added to the list of event id's referenced in [Event](#Event)
+- Versioning policy updated to clarify that only major versions may be requested by version number
+
 ## Changelog from v1.0
 
 Changes from v1.0 are as follows:
 - Added value `5` to `round.format` enum - `5` corresponds to a Best of 5 format as described in the [2026 Regulation Changes](https://github.com/thewca/wca-regulations-january-2026/pull/48).
+
+
+## Required Fields
+The following fields must be included in any WCIF payload - see [Competition](#Competition) for more details on these fields:
+- `id`
+- `formatVersion`
 
 ## Objects
 
@@ -66,8 +78,8 @@ Represents the root object and is usually referred to as a WCIF.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `formatVersion` | `String` | Used to distinguish different versions of the format (most notably compared to the past `0.3`). |
-| `id` | `String` | The unique competition identifier. |
+| `formatVersion` | `String` | Required field. Used to distinguish different versions of the format (most notably compared to the past `0.3`). |
+| `id` | `String` | Required field. The unique competition identifier. |
 | `name` | `String` | The full name of the competition. |
 | `shortName` | `String` | A briefer version of `name`, may be the same if `name` is already short. |
 | `series` | [`[Series\|null]`](#series) | The Competition Series that this competition is part of, if any. |
