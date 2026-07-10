@@ -1,7 +1,7 @@
 # WCIF
 
 ## Version
-- Number: 2.1.1
+- Number: 2.1.2
 - Status: Latest
 - Next Status: Stable
 - Status Advancement Date: N/A
@@ -15,6 +15,11 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 - Familiarize yourself with the [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/stable/versioning-policy.md)
 - [Sign up](https://www.worldcubeassociation.org/profile/edit?section=preferences) in your profile preferences to our developer mailing list to receive updates about new versions and deprecations.
 - Optionally, configure your application to monitor the `next_status` and `status_advancement_date` properties and alert you when these values change
+
+## Required Fields
+The following fields must be included in any WCIF payload - see [Competition](#Competition) for more details on these fields:
+- `id`
+- `formatVersion`
 
 ## Objects
 
@@ -61,8 +66,8 @@ Represents the root object and is usually referred to as a WCIF.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `formatVersion` | `String` | Used to distinguish different versions of the format (most notably compared to the past `0.3`). |
-| `id` | `String` | The unique competition identifier. |
+| `formatVersion` | `String` | Required field. Used to distinguish different versions of the format (most notably compared to the past `0.3`). |
+| `id` | `String` | Required field. The unique competition identifier. |
 | `name` | `String` | The full name of the competition. |
 | `shortName` | `String` | A briefer version of `name`, may be the same if `name` is already short. |
 | `series` | [`Series`](#series)\|`null` | The Competition Series that this competition is part of, if any. |
