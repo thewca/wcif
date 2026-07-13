@@ -4,7 +4,7 @@ The official specification of the [WCA Competition Interchange Format](./specifi
 
 ## Versioning
 
-This document is for v2.1.2, the current `latest` version of WCIF. See the following for more information:
+This document is for v2.2, the current `latest` version of WCIF. See the following for more information:
 - [Changelog](https://github.com/thewca/wcif/blob/latest/changelog.md) for more information.
 - [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/latest/versioning-policy.md) for more information.
 

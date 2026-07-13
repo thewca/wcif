@@ -1,7 +1,7 @@
 # WCIF
 
 ## Version
-- Number: 2.1.2
+- Number: 2.2
 - Status: Latest
 - Next Status: Stable
 - Status Advancement Date: N/A
