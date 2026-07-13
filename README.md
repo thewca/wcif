@@ -4,7 +4,7 @@ The official specification of the [WCA Competition Interchange Format](./specifi
 
 ## Versioning
 
-This document is for v1.1.1, the current `stable` version of WCIF. See [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/stable/versioning-policy.md) for more information.
+This document is for v1.2, the current `stable` version of WCIF. See [WCIF Versioning Policy](https://github.com/thewca/wcif/blob/stable/versioning-policy.md) for more information.
 
 ## Implementation notes
 
