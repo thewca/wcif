@@ -21,7 +21,6 @@ If you intend to read/write WCIF from the WCA website in your application, pleas
 
 - Added "Required Fields" section and marked `id` and `formatVersion` as required
 - `FTO` will be added to the list of event id's referenced in [Event](#Event)
-- Versioning policy updated to clarify that only major versions may be requested by version number
 
 ## Changelog from v1.0
 
