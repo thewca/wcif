@@ -1,3 +1,9 @@
+## Changelog from v2.1.1
+
+### Minor
+- `FTO` will be added to the list of event id's referenced in [Event](#Event)
+- Added "Required Fields" section and marked `id` and `formatVersion` as required
+
 ## v2.1.1: Change from v2.0.1
 
 ### Minor
