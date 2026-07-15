@@ -32,7 +32,7 @@ The existing WCIF endpoints will remain, and always serve the `stable` version o
 
 The following endpoints are not yet available, but will be implemented when we increment to v2.0 - this is expected in Q1 2026.
 - `api/v0/competitions/{competition-id}/wcif/{lifecycle-name}` to request the latest, or beta versions
--- `api/v0/competitions/{competition-id}/wcif/version/{version-number}` to request a specific version number
+- `api/v0/competitions/{competition-id}/wcif/version/{version-number}` to request a specific version number
 
 ## Backwards Compatibility  
 - In general, we aim to align with Google's [API-180](https://google.aip.dev/180) - feel free to raise concerns with us by opening a Github issue if you feel we deviate from this
